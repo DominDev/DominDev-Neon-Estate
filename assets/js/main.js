@@ -1,36 +1,40 @@
 // --- DATA SOURCE ---
 const properties = [
   {
-    title: "Glass Pavilion",
-    price: "14 200 000 PLN",
-    location: "Warszawa, Mokotów",
+    title: "Penthouse Skyline",
+    price: "18 500 000 PLN",
+    location: "Warszawa",
     beds: 4,
     sqm: 320,
     img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
+    description: "Luksusowy penthouse z panoramicznym widokiem na centrum Warszawy. Minimalistyczna elegancja spotyka funkcjonalność."
   },
   {
-    title: "Onyx Penthouse",
-    price: "8 850 000 PLN",
-    location: "Gdańsk, Śródmieście",
-    beds: 3,
-    sqm: 180,
-    img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    title: "Forest Retreat",
-    price: "22 500 000 PLN",
-    location: "Zakopane, Premium Zone",
-    beds: 6,
-    sqm: 450,
-    img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    title: "Azure Cliff Villa",
-    price: "35 000 000 PLN",
-    location: "Gdynia, Orłowo",
+    title: "Rezydencja Horizon",
+    price: "28 900 000 PLN",
+    location: "Gdynia",
     beds: 5,
     sqm: 520,
     img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
+    description: "Wyjątkowa rezydencja nad morzem z bezpośrednim dostępem do plaży i tarasem widokowym."
+  },
+  {
+    title: "Apartament Aurora",
+    price: "12 200 000 PLN",
+    location: "Kraków",
+    beds: 3,
+    sqm: 180,
+    img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
+    description: "Elegancki apartament w sercu Krakowa. Połączenie historycznego uroku z nowoczesnym designem."
+  },
+  {
+    title: "Mountain Retreat",
+    price: "35 000 000 PLN",
+    location: "Zakopane",
+    beds: 6,
+    sqm: 450,
+    img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=800&auto=format&fit=crop",
+    description: "Ekskluzywna rezydencja górska z widokiem na Tatry. Luksus w harmonii z naturą."
   },
 ];
 
@@ -245,6 +249,43 @@ const preventBodyScroll = () => {
   }
 };
 
+// 9. Smooth Scroll for Navigation Links
+const initSmoothScroll = () => {
+  const links = document.querySelectorAll('a[href^="#"]');
+
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+
+      // Skip if href is just "#"
+      if (href === '#') return;
+
+      e.preventDefault();
+
+      const targetId = href.substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      if (targetSection) {
+        // Close mobile menu if open
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+          mobileMenu.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        }
+
+        // Smooth scroll to section
+        const navHeight = document.querySelector('nav').offsetHeight;
+        const targetPosition = targetSection.offsetTop - navHeight - 20;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+};
+
 // 8. Initialization
 window.addEventListener("load", () => {
   renderProperties();
@@ -267,6 +308,7 @@ window.addEventListener("load", () => {
     initMobileMenu();
     initScrollTop();
     preventBodyScroll();
+    initSmoothScroll();
   }, loaderDelay);
 });
 

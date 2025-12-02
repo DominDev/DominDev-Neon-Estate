@@ -47,10 +47,10 @@
 
         <!-- Desktop Menu -->
         <ul class="nav-links hover-target">
-          <li><a href="#">Rezydencje</a></li>
-          <li><a href="#">Inwestycje</a></li>
-          <li><a href="#">Sprzedaż</a></li>
-          <li><a href="#">Private Office</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#about">O Studio</a></li>
+          <li><a href="#process">Proces</a></li>
+          <li><a href="#contact">Kontakt</a></li>
         </ul>
 
         <!-- Mobile Toggle -->
@@ -66,11 +66,10 @@
         <i class="fa-solid fa-times"></i>
       </div>
       <ul>
-        <li><a href="#">Rezydencje</a></li>
-        <li><a href="#">Inwestycje</a></li>
-        <li><a href="#">Sprzedaż</a></li>
-        <li><a href="#">Private Office</a></li>
-        <li><a href="#">Kontakt</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#about">O Studio</a></li>
+        <li><a href="#process">Proces</a></li>
+        <li><a href="#contact">Kontakt</a></li>
       </ul>
     </div>
 
@@ -98,25 +97,69 @@
       </div>
 
       <div class="container hero-content">
-        <span class="hero-label">High-Performance Living</span>
-        <h1>Architektura<br /><span>W Nowym Świetle</span></h1>
+        <span class="hero-label">Luxury Architecture Studio</span>
+        <h1>Architektura, która<br /><span>definiuje luksus.</span></h1>
+        <p class="hero-subtitle">Projektujemy luksusowe apartamenty i rezydencje, gdzie światło, przestrzeń i panorama tworzą harmonię bez kompromisów.</p>
 
-        <div class="search-bar hover-target">
-          <input type="text" placeholder="Lokalizacja, nazwa osiedla..." />
-          <button class="search-btn hover-target">
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
+        <div class="hero-cta-group">
+          <a href="#contact" class="btn-primary hover-target">Umów konsultację</a>
+          <a href="#portfolio" class="btn-secondary hover-target">Zobacz realizacje</a>
         </div>
       </div>
     </header>
 
-    <!-- 4. LISTINGS SECTION -->
-    <section class="section-padding">
+    <!-- 4. PHILOSOPHY SECTION (3 Pillars) -->
+    <section class="section-padding philosophy-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="hero-label" style="color: var(--accent-neon); text-shadow: 0 0 10px var(--accent-glow);">Filozofia Projektowa</span>
+          <h2>Trzy Filary Luksusu</h2>
+        </div>
+
+        <div class="philosophy-grid">
+          <div class="philosophy-card reveal">
+            <div class="philosophy-icon">
+              <i class="fa-solid fa-gem"></i>
+            </div>
+            <h3>Luksus bez kompromisów</h3>
+            <p>Najwyższej jakości materiały, precyzyjne detale i idealne proporcje. Każdy element jest starannie dobrany, aby tworzyć przestrzeń ponadczasowej elegancji.</p>
+          </div>
+
+          <div class="philosophy-card reveal">
+            <div class="philosophy-icon">
+              <i class="fa-solid fa-sun"></i>
+            </div>
+            <h3>Światło i panorama</h3>
+            <p>Projektujemy z myślą o naturalnym świetle i widoku. Osie widokowe, panoramiczne przeszklenia i harmonia z otoczeniem definiują każdą realizację.</p>
+          </div>
+
+          <div class="philosophy-card reveal">
+            <div class="philosophy-icon">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <h3>Cisza technologii</h3>
+            <p>Zaawansowane rozwiązania smart home i technologia, która znika w tle. Pozostaje tylko czysta estetyka i intuicyjny komfort użytkowania.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. QUOTE DIVIDER -->
+    <section class="quote-divider">
+      <div class="container">
+        <div class="quote-content reveal">
+          <p>"Neon.Estate nie projektuje mieszkań.<br />Projektuje doświadczenia, w których chce się zamieszkać."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. PORTFOLIO SECTION -->
+    <section class="section-padding" id="portfolio">
       <div class="container">
         <div class="listings-header reveal">
-          <h2>Wybrane Posiadłości</h2>
+          <h2>Wybrane Realizacje</h2>
           <a href="#" class="btn-link hover-target"
-            >Zobacz wszystkie (24) <i class="fa-solid fa-arrow-right-long"></i
+            >Zobacz wszystkie projekty <i class="fa-solid fa-arrow-right-long"></i
           ></a>
         </div>
 
@@ -126,12 +169,48 @@
       </div>
     </section>
 
-    <!-- 5. ABOUT SECTION -->
-    <section class="section-padding about-section">
+    <!-- 7. PROCESS SECTION (4 Steps) -->
+    <section class="section-padding process-section" id="process">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="hero-label" style="color: var(--accent-neon); text-shadow: 0 0 10px var(--accent-glow);">Proces Współpracy</span>
+          <h2>Od Wizji do Realizacji</h2>
+        </div>
+
+        <div class="process-timeline">
+          <div class="process-step reveal">
+            <div class="step-number">01</div>
+            <h3>Konsultacja i wizja</h3>
+            <p>Poznajemy Twoje oczekiwania, styl życia i marzenia. Każdy projekt zaczyna się od rozmowy o tym, czym dla Ciebie jest luksus.</p>
+          </div>
+
+          <div class="process-step reveal">
+            <div class="step-number">02</div>
+            <h3>Koncepcja architektoniczna</h3>
+            <p>Tworzymy wizję przestrzeni z uwzględnieniem światła, widoków i funkcjonalności. Prezentujemy rozwiązania, które przekraczają oczekiwania.</p>
+          </div>
+
+          <div class="process-step reveal">
+            <div class="step-number">03</div>
+            <h3>Projekt wykonawczy i detale</h3>
+            <p>Dopracowujemy każdy detal – od materiałów po rozwiązania techniczne. Wszystko musi być perfekcyjne, zanim przekażemy projekt do realizacji.</p>
+          </div>
+
+          <div class="process-step reveal">
+            <div class="step-number">04</div>
+            <h3>Nadzór autorski</h3>
+            <p>Czuwamy nad jakością wykonania na każdym etapie budowy. Twoja wizja jest realizowana dokładnie tak, jak została zaprojektowana.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ABOUT SECTION -->
+    <section class="section-padding about-section" id="about">
       <div class="about-bg" id="about-parallax"></div>
       <div class="container about-grid">
         <div class="about-content reveal">
-          <span class="tech-badge">Headless Architecture Concept</span>
+          <span class="tech-badge">Architecture & Design Studio</span>
           <span
             class="hero-label"
             style="
@@ -140,42 +219,97 @@
               margin-bottom: 20px;
               text-shadow: none;
             "
-            >Filozofia Marki</span
+            >O Neon.Estate</span
           >
-          <h2>Więcej niż metraż.<br /><span>To styl życia.</span></h2>
+          <h2>Studio architektury<br /><span>luksusowych nieruchomości.</span></h2>
           <p>
-            Łączymy technologię z architekturą. Nasza platforma, zbudowana w
-            oparciu o Next.js, zapewnia błyskawiczny dostęp do najbardziej
-            ekskluzywnych ofert na rynku, bez zbędnego przeładowywania stron.
-            Luksus wymaga płynności.
+            Neon.Estate to studio specjalizujące się w projektowaniu luksusowych apartamentów, penthouse'ów i rezydencji. Skupiamy się na świetle, przestrzeni i widoku – elementach, które definiują wyjątkowe miejsce do życia. Każdy projekt to harmonia funkcjonalności i estetyki, która pozostaje ponadczasowa.
           </p>
 
           <div class="stat-row">
             <div class="stat-item">
-              <h4>$1.2B</h4>
-              <span>Wartość Portfela</span>
+              <h4>15+</h4>
+              <span>Zrealizowanych Projektów</span>
             </div>
             <div class="stat-item">
-              <h4>0.4s</h4>
-              <span>Czas Ładowania</span>
+              <h4>&lt; 1s</h4>
+              <span>Pierwsze Wrażenie</span>
+            </div>
+            <div class="stat-item">
+              <h4>4K</h4>
+              <span>Wizualizacje Premium</span>
             </div>
           </div>
 
           <a
-            href="#"
+            href="#contact"
             class="btn-link hover-target"
             style="border-color: var(--accent-neon); color: var(--accent-neon)"
-            >Poznaj Zespół <i class="fa-solid fa-arrow-right-long"></i
+            >Porozmawiajmy o Twoim projekcie <i class="fa-solid fa-arrow-right-long"></i
           ></a>
         </div>
       </div>
     </section>
 
-    <!-- 6. FOOTER -->
+
+    <!-- 9. CONTACT SECTION -->
+    <section class="section-padding contact-section" id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-content reveal">
+            <span class="hero-label" style="color: var(--accent-neon); text-shadow: 0 0 10px var(--accent-glow); margin-bottom: 20px;">Skontaktuj się</span>
+            <h2>Porozmawiajmy<br /><span>o Twoim apartamencie.</span></h2>
+            <p>
+              Jesteśmy gotowi wysłuchać Twojej wizji i pomóc ją zrealizować. Każdy projekt zaczyna się od rozmowy – napisz do nas, a my odpowiemy w ciągu 24 godzin.
+            </p>
+            <div class="contact-info">
+              <div class="info-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>hello@neon.estate</span>
+              </div>
+              <div class="info-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>+48 123 456 789</span>
+              </div>
+            </div>
+          </div>
+
+          <form class="contact-form reveal" id="contact-form">
+            <div class="form-group">
+              <input type="text" placeholder="Imię i nazwisko" required class="hover-target" />
+            </div>
+            <div class="form-group">
+              <input type="email" placeholder="E-mail" required class="hover-target" />
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Miasto / Lokalizacja inwestycji" class="hover-target" />
+            </div>
+            <div class="form-group">
+              <select class="hover-target">
+                <option value="">Budżet</option>
+                <option value="1-3m">1-3 mln PLN</option>
+                <option value="3-5m">3-5 mln PLN</option>
+                <option value="5-10m">5-10 mln PLN</option>
+                <option value="10m+">Powyżej 10 mln PLN</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea placeholder="Opisz swoją wizję..." rows="5" class="hover-target"></textarea>
+            </div>
+            <button type="submit" class="btn-primary hover-target">
+              Wyślij zapytanie
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FOOTER -->
     <footer>
       <div class="container">
         <span class="footer-logo">Neon<span>.</span>Estate</span>
-        <span class="hero-label footer-subtitle">Digital Luxury Real Estate</span>
+        <span class="hero-label footer-subtitle">Architecture & Design Studio</span>
 
         <a href="#" class="domin-dev-tag hover-target">
           Concept & Development by <strong>DominDev</strong>
