@@ -1501,23 +1501,71 @@ footer .container {
 }
 
 .faq-icon {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent-neon);
-  font-size: 1rem;
   transition: var(--transition-smooth);
   flex-shrink: 0;
+  transform: rotate(45deg);
+  position: relative;
+  background: transparent;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.2);
+}
+
+/* Hide FontAwesome icon */
+.faq-icon i {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Create + sign with pseudo-elements */
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  background: rgba(212, 175, 55, 0.7);
+  box-shadow: 0 0 4px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-icon::before {
+  width: 55%;
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.faq-icon::after {
+  width: 1px;
+  height: 55%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .faq-item.faq-open .faq-icon {
-  transform: rotate(45deg);
   background: rgba(212, 175, 55, 0.1);
   box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  transform: rotate(135deg);
+}
+
+.faq-item.faq-open .faq-icon::before {
+  width: 70%;
+  height: 2px;
+  box-shadow: 0 0 15px var(--accent-neon);
+}
+
+.faq-item.faq-open .faq-icon::after {
+  width: 2px;
+  height: 70%;
+  box-shadow: 0 0 15px var(--accent-neon);
 }
 
 .faq-answer {
