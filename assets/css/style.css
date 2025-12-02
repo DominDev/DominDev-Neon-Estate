@@ -744,10 +744,9 @@ body.menu-open .hamburger {
   transition: 0.3s;
 }
 
-/* HOVER FIX: Make text black on gold background for contrast */
 .btn-link:hover {
-  color: #050505 !important; /* Force Black */
-  background: var(--accent-neon);
+  color: var(--accent-neon) !important;
+  background: transparent;
   border-color: var(--accent-neon) !important;
   box-shadow: 0 0 20px var(--accent-glow);
   gap: 20px;
