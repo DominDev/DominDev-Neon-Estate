@@ -408,6 +408,113 @@ window.addEventListener("load", () => {
   }, loaderDelay);
 });
 
+// --- GEMINI API INTEGRATION (Neon AI Atelier) ---
+
+// Copy Concept to Clipboard
+function copyConcept() {
+  const resultText = document.getElementById('ai-text').innerText;
+  const copyBtn = document.getElementById('copy-btn');
+
+  navigator.clipboard.writeText(resultText).then(() => {
+    // Visual feedback
+    const originalHTML = copyBtn.innerHTML;
+    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+    copyBtn.style.background = 'rgba(212, 175, 55, 0.2)';
+
+    setTimeout(() => {
+      copyBtn.innerHTML = originalHTML;
+      copyBtn.style.background = 'transparent';
+    }, 2000);
+  }).catch(err => {
+    console.error('Copy failed:', err);
+    alert('Nie udało się skopiować tekstu');
+  });
+}
+
+async function generateConcept() {
+  const inputVal = document.getElementById('vision-input').value;
+  const btn = document.getElementById('generate-btn');
+  const resultBox = document.getElementById('ai-result');
+  const resultText = document.getElementById('ai-text');
+
+  // Validation
+  if (!inputVal.trim()) {
+    alert("Proszę wpisać wizję wnętrza.");
+    return;
+  }
+
+  // UI Loading State
+  const originalBtnText = btn.innerHTML;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Tworzenie konceptu';
+  btn.disabled = true;
+  resultBox.style.display = 'none';
+  resultText.innerHTML = '';
+
+  // API Configuration
+  const apiKey = "AIzaSyCIzGv1ZWOVReT18hy1luxG6-flzSu9H8w";
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+  // System Prompt - Poetycki z delikatnymi akcentami technicznymi
+  const systemPrompt = `Jesteś architektem Neon.Estate, mistrzem stylu 'Quiet Luxury'.
+
+Stwórz ekskluzywny, poetycki koncept architektoniczny. WAŻNE: Odpowiedź musi być zwięzła i malownicza, z subtelnymi akcentami technicznymi.
+
+Format (Markdown **pogrubienia**):
+
+**Wizja:**
+Jedno poetyckie zdanie - metafora przestrzeni i emocji, które wzbudza.
+
+**Palette:**
+Wymień 3-4 luksusowe materiały z pełnymi nazwami (np. "marmur Calacatta Oro", "dąb wędzony bielony").
+Dodaj JEDNO krótkie zdanie o tym, jak współgrają.
+
+**Światło & Technologia:**
+Maksymalnie 2 zdania: naturalne światło + oświetlenie architektoniczne + niewidzialna integracja smart home (BEZ szczegółów technicznych jak CCT, lux, Hz - tylko poetycki opis funkcji: "sterowanie scenami świetlnymi", "automatyka klimatu").
+
+Ton: Elitarny, malowniczy, z subtelną wzmianką o technologii (NIE specyfikacja techniczna!).
+
+Wizja klienta: "${inputVal}"`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{ text: systemPrompt }]
+        }]
+      })
+    });
+
+    if (!response.ok) throw new Error('API Error');
+
+    const data = await response.json();
+    const aiResponse = data.candidates[0].content.parts[0].text;
+
+    // Format Markdown to HTML (złote pogrubienia + czyszczenie)
+    const formattedResponse = aiResponse
+      .replace(/###\s*/g, '') // Usuń nagłówki markdown ###
+      .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--accent-neon)">$1</strong>')
+      .replace(/\n/g, '<br>');
+
+    resultText.innerHTML = formattedResponse;
+    resultBox.style.display = 'block';
+
+    // Smooth scroll to result
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  } catch (error) {
+    console.error(error);
+    resultText.innerHTML = "Przepraszamy, nasz wirtualny architekt jest chwilowo zajęty. Spróbuj ponownie za chwilę.";
+    resultBox.style.display = 'block';
+  } finally {
+    btn.innerHTML = originalBtnText;
+    btn.disabled = false;
+  }
+}
+
 // Performance optimization: Lazy load images
 if ("loading" in HTMLImageElement.prototype) {
   // Browser supports lazy loading
