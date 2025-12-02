@@ -63,8 +63,15 @@ const renderProperties = () => {
   });
 };
 
-// 2. Custom Cursor Logic (Diamond)
+// 2. Custom Cursor Logic (Diamond) - Only on desktop
 const initCursor = () => {
+  // Only run on non-touch devices
+  const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+  if (isTouchDevice) {
+    return; // Skip custom cursor on touch devices
+  }
+
   const cursorDiamond = document.querySelector(".cursor-diamond");
 
   // Mouse Movement
@@ -126,8 +133,16 @@ const initObserver = () => {
     .forEach((el) => observer.observe(el));
 };
 
-// 4. Parallax Effect
+// 4. Parallax Effect (disabled on mobile for performance)
 const initParallax = () => {
+  // Check if device is mobile/touch or prefers reduced motion
+  const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (isMobile || prefersReducedMotion) {
+    return; // Skip parallax on mobile and for users who prefer reduced motion
+  }
+
   const bg = document.getElementById("parallax-bg");
   const aboutBg = document.getElementById("about-parallax");
 
@@ -214,11 +229,30 @@ const initScrollTop = () => {
   });
 };
 
-// 7. Initialization
+// 7. Prevent body scroll when mobile menu is open
+const preventBodyScroll = () => {
+  const menu = document.getElementById("mobile-menu");
+  const observer = new MutationObserver(() => {
+    if (menu.classList.contains("active")) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  });
+
+  if (menu) {
+    observer.observe(menu, { attributes: true, attributeFilter: ["class"] });
+  }
+};
+
+// 8. Initialization
 window.addEventListener("load", () => {
   renderProperties();
 
-  // Hide Loader
+  // Hide Loader with faster timing on mobile
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  const loaderDelay = isMobile ? 800 : 1500;
+
   setTimeout(() => {
     const loader = document.getElementById("loader");
     if (loader) {
@@ -232,5 +266,21 @@ window.addEventListener("load", () => {
     initParallax();
     initMobileMenu();
     initScrollTop();
-  }, 1500);
+    preventBodyScroll();
+  }, loaderDelay);
 });
+
+// Performance optimization: Lazy load images
+if ("loading" in HTMLImageElement.prototype) {
+  // Browser supports lazy loading
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  images.forEach((img) => {
+    img.src = img.dataset.src;
+  });
+} else {
+  // Fallback for browsers that don't support lazy loading
+  const script = document.createElement("script");
+  script.src =
+    "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js";
+  document.body.appendChild(script);
+}

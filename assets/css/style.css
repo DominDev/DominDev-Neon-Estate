@@ -21,6 +21,11 @@
   --container: 1400px;
   --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-snap: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Responsive Spacing */
+  --container-padding: clamp(20px, 5vw, 40px);
+  --section-padding: clamp(60px, 12vw, 140px);
+  --nav-padding: clamp(20px, 3vw, 30px);
 }
 
 /* --- 2. RESET & BASE --- */
@@ -38,6 +43,8 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -151,13 +158,14 @@ body.hovering .cursor-diamond::after {
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--container-padding);
   position: relative;
   z-index: 2;
+  width: 100%;
 }
 
 .section-padding {
-  padding: 140px 0;
+  padding: var(--section-padding) 0;
   position: relative;
 }
 
@@ -187,7 +195,9 @@ nav {
   top: 0;
   width: 100%;
   z-index: 1000;
-  padding: 30px 0;
+  padding: var(--nav-padding) 0;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   background: rgba(5, 5, 5, 0.85);
   backdrop-filter: blur(15px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -202,7 +212,7 @@ nav {
 
 .logo {
   font-family: var(--font-sans);
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
   font-weight: 300;
   letter-spacing: -1px;
   color: white;
@@ -224,7 +234,7 @@ nav {
 }
 
 .nav-links a {
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
   text-transform: uppercase;
   letter-spacing: 2px;
   color: rgba(255, 255, 255, 0.8);
@@ -232,6 +242,7 @@ nav {
   padding: 10px 0;
   transition: color 0.3s;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -435,7 +446,8 @@ body.menu-open .hamburger {
 
 /* --- 7. HERO SECTION (Neon Architecture) --- */
 .hero {
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100svh; /* Modern browsers - accounting for mobile browser bars */
   position: relative;
   overflow: hidden;
   display: flex;
@@ -671,7 +683,7 @@ body.menu-open .hamburger {
   color: white;
   flex: 1;
   font-family: var(--font-sans);
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
   font-weight: 300;
 }
 
@@ -714,7 +726,7 @@ body.menu-open .hamburger {
 }
 
 .listings-header h2 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
 }
 
 .btn-link {
@@ -744,8 +756,8 @@ body.menu-open .hamburger {
 
 .listings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-  gap: 60px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  gap: clamp(30px, 5vw, 60px);
 }
 
 .property-card {
@@ -754,7 +766,7 @@ body.menu-open .hamburger {
 }
 
 .card-image-wrapper {
-  height: 600px;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   position: relative;
   margin-bottom: 30px;
@@ -765,6 +777,7 @@ body.menu-open .hamburger {
 }
 
 .card-image-wrapper img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -808,7 +821,7 @@ body.menu-open .hamburger {
 }
 
 .card-title {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   margin-bottom: 10px;
   color: white;
   transition: color 0.3s;
@@ -881,8 +894,8 @@ body.menu-open .hamburger {
 }
 
 .about-content h2 {
-  font-size: 3.5rem;
-  margin-bottom: 40px;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  margin-bottom: clamp(20px, 4vw, 40px);
   line-height: 1.1;
 }
 
@@ -908,8 +921,8 @@ body.menu-open .hamburger {
 
 .about-content p {
   color: var(--text-muted);
-  font-size: 1.15rem;
-  margin-bottom: 50px;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  margin-bottom: clamp(30px, 5vw, 50px);
   font-weight: 300;
   line-height: 1.8;
   max-width: 600px;
@@ -922,7 +935,7 @@ body.menu-open .hamburger {
 }
 
 .stat-item h4 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   color: var(--accent-neon);
   line-height: 1;
   margin-bottom: 10px;
@@ -941,18 +954,25 @@ body.menu-open .hamburger {
 /* --- 10. FOOTER --- */
 footer {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 100px 0 40px;
+  padding: clamp(60px, 10vw, 100px) 0 40px;
   text-align: center;
   background: #020202;
   position: relative;
   z-index: 2;
 }
 
+footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 2vw, 20px);
+}
+
 .footer-logo {
   font-family: var(--font-serif);
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   display: block;
 }
 
@@ -961,13 +981,20 @@ footer {
   text-shadow: 0 0 15px var(--accent-glow);
 }
 
+.footer-subtitle {
+  margin: 0;
+  text-shadow: none;
+  opacity: 0.5;
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+}
+
 .domin-dev-tag {
-  margin-top: 50px;
+  margin-top: clamp(30px, 5vw, 50px);
   display: inline-block;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
   color: var(--text-muted);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 25px;
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 25px);
   border-radius: 50px;
   transition: 0.3s;
 }
@@ -983,6 +1010,14 @@ footer {
   background: rgba(212, 175, 55, 0.08);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
   transform: translateY(-3px);
+}
+
+.copyright {
+  display: block;
+  margin-top: clamp(20px, 4vw, 30px);
+  font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+  color: var(--text-muted);
+  opacity: 0.6;
 }
 
 /* --- 11. LOADING SCREEN --- */
@@ -1094,6 +1129,8 @@ footer {
 }
 
 /* --- 13. RESPONSIVE BREAKPOINTS --- */
+
+/* Large Tablets & Small Desktops */
 @media (max-width: 1200px) {
   .about-grid {
     grid-template-columns: 1fr;
@@ -1103,87 +1140,334 @@ footer {
     width: 100%;
     opacity: 0.2;
   }
+  .stat-row {
+    gap: 40px;
+  }
 }
 
+/* Tablets */
 @media (max-width: 1024px) {
-  .container {
-    padding: 0 30px;
-  }
   .listings-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  .hero h1 {
-    font-size: 4.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
   }
   /* Disable custom cursor on touch devices */
   .cursor-diamond {
     display: none;
   }
   * {
-    cursor: auto;
+    cursor: auto !important;
+  }
+  button, a, .hover-target {
+    cursor: pointer !important;
   }
 }
 
+/* Mobile & Tablets */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
   }
   .hamburger {
     display: block;
-    cursor: pointer;
+    cursor: pointer !important;
   }
 
   .mobile-menu a {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    margin: 15px 0;
   }
 
   .mobile-menu-close {
-    top: 28px;
-    right: 30px;
-    width: 28px;
-    height: 28px;
+    top: 22px;
+    right: var(--container-padding);
   }
 
-  /* Adjust typography safely */
-  .hero h1 {
-    font-size: 2.8rem;
-  }
   .listings-grid {
     grid-template-columns: 1fr;
   }
-  .section-padding {
-    padding: 80px 0;
-  }
-  .card-image-wrapper {
-    height: 400px;
-  }
+
   .listings-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    margin-bottom: 40px;
   }
+
   .search-bar {
     padding: 8px 8px 8px 20px;
     width: 100%;
+    max-width: 100%;
   }
+
   .search-btn {
     width: 45px;
     height: 45px;
+    font-size: 1rem;
   }
-  .about-content h2 {
-    font-size: 2.2rem;
-  }
+
   .stat-row {
     flex-direction: column;
     gap: 30px;
   }
-  .floating-prism {
+
+  .floating-prism,
+  .v-line.l3 {
     display: none;
-  } /* Hide complex graphic on mobile */
+  }
+
   .scroll-top {
     bottom: 20px;
     right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .hero-content {
+    padding-top: 60px;
+  }
+
+  .card-price-tag {
+    font-size: 0.85rem;
+    padding: 10px 16px;
+    top: 20px;
+    left: 20px;
+  }
+
+  .btn-link {
+    padding: 12px 24px;
+    font-size: 0.75rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+    margin-bottom: 40px;
+  }
+
+  .hero-label {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+
+  .search-bar {
+    padding: 6px 6px 6px 16px;
+  }
+
+  .search-bar input {
+    font-size: 0.95rem;
+  }
+
+  .search-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .mobile-menu a {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+    margin: 12px 0;
+  }
+
+  .card-meta {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .about-grid {
+    gap: 40px;
+  }
+
+  .footer-logo {
+    font-size: 2rem;
+  }
+
+  .domin-dev-tag {
+    font-size: 0.75rem;
+    padding: 10px 20px;
+  }
+}
+
+/* Extra Small Mobile (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  .hero h1 {
+    font-size: clamp(2rem, 11vw, 2.5rem);
+  }
+
+  .search-bar input {
+    font-size: 0.9rem;
+  }
+
+  .mobile-menu-close {
+    width: 26px;
+    height: 26px;
+  }
+
+  .card-image-wrapper {
+    aspect-ratio: 4 / 5;
+  }
+
+  .scroll-top {
     width: 45px;
     height: 45px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* --- 14. TOUCH & ACCESSIBILITY IMPROVEMENTS --- */
+
+/* Touch-friendly tap targets (minimum 44x44px for iOS) */
+@media (hover: none) and (pointer: coarse) {
+  .hamburger,
+  .mobile-menu-close {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .scroll-top {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  /* Remove hover effects on touch devices */
+  .property-card:hover .card-image-wrapper {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .property-card:hover .card-image-wrapper img {
+    transform: none;
+    filter: grayscale(10%) contrast(95%);
+  }
+
+  .property-card:hover .card-title {
+    color: white;
+    text-shadow: none;
+  }
+
+  /* Show price tag by default on touch devices */
+  .card-price-tag {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Disable parallax on touch devices for performance */
+  .hero-bg,
+  .about-bg {
+    transform: none !important;
+  }
+
+  /* Better touch scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-bg,
+  .about-bg {
+    transform: none !important;
+  }
+
+  .ambient-glow {
+    animation: none;
+  }
+
+  .floating-prism {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .hero-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 5, 5, 0.5) 0%,
+      rgba(5, 5, 5, 0.9) 50%,
+      rgba(5, 5, 5, 1) 100%
+    );
+  }
+
+  .card-image-wrapper img {
+    filter: contrast(110%);
+  }
+}
+
+/* Dark mode adjustments (if user prefers light mode - rare case) */
+@media (prefers-color-scheme: light) {
+  /* Keep dark theme but ensure readability */
+  .text-muted {
+    opacity: 0.8;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    min-height: 100vh;
+  }
+
+  .hero-content {
+    padding-top: 40px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+    margin-bottom: 30px;
+  }
+
+  .mobile-menu a {
+    font-size: 1.5rem;
+    margin: 10px 0;
+  }
+}
+
+/* Print styles */
+@media print {
+  .cursor-diamond,
+  .ambient-glow,
+  .hamburger,
+  .mobile-menu,
+  .scroll-top,
+  .floating-prism,
+  .hero-arch-grid {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .hero-overlay {
+    background: rgba(255, 255, 255, 0.8);
   }
 }
