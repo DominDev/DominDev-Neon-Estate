@@ -224,13 +224,14 @@ nav {
 }
 
 .nav-links a {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.8);
   position: relative;
   padding: 10px 0;
   transition: color 0.3s;
+  font-weight: 400;
 }
 
 .nav-links a:hover {
@@ -260,6 +261,18 @@ nav {
   font-size: 1.5rem;
   z-index: 1002;
   cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.hamburger:hover {
+  transform: scale(1.1);
+}
+
+/* Hide hamburger when menu is active */
+body.menu-open .hamburger {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Mobile Menu */
@@ -287,6 +300,19 @@ nav {
   transform: translateY(0);
 }
 
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-menu li {
+  margin: 0;
+}
+
 .mobile-menu a {
   display: block;
   font-family: var(--font-serif);
@@ -296,23 +322,115 @@ nav {
   opacity: 0;
   transform: translateY(20px);
   transition: 0.4s ease;
+  text-align: center;
+}
+
+.mobile-menu a:hover {
+  color: var(--accent-neon);
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
 }
 
 .mobile-menu.active a {
   opacity: 1;
   transform: translateY(0);
 }
-.mobile-menu.active a:nth-child(1) {
+.mobile-menu.active li:nth-child(1) a {
   transition-delay: 0.1s;
 }
-.mobile-menu.active a:nth-child(2) {
+.mobile-menu.active li:nth-child(2) a {
   transition-delay: 0.2s;
 }
-.mobile-menu.active a:nth-child(3) {
+.mobile-menu.active li:nth-child(3) a {
   transition-delay: 0.3s;
 }
-.mobile-menu.active a:nth-child(4) {
+.mobile-menu.active li:nth-child(4) a {
   transition-delay: 0.4s;
+}
+.mobile-menu.active li:nth-child(5) a {
+  transition-delay: 0.5s;
+}
+
+.mobile-menu-close {
+  position: fixed;
+  top: 26px;
+  right: 40px;
+  cursor: pointer;
+  z-index: 1003;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: transparent;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.2);
+  transform: rotate(45deg);
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .mobile-menu-close {
+    right: 30px;
+  }
+}
+
+/* Hide the icon immediately */
+.mobile-menu-close i {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.mobile-menu-close::before,
+.mobile-menu-close::after {
+  content: "";
+  position: absolute;
+  background: rgba(212, 175, 55, 0.7);
+  box-shadow: 0 0 4px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu-close::before {
+  width: 55%;
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mobile-menu-close::after {
+  width: 1px;
+  height: 55%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mobile-menu.active .mobile-menu-close {
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+
+.mobile-menu-close:hover {
+  border-color: var(--accent-neon);
+  background: rgba(212, 175, 55, 0.1);
+  box-shadow: 0 0 25px var(--accent-glow);
+  transform: rotate(135deg) scale(1.15);
+}
+
+.mobile-menu-close:hover::before {
+  width: 70%;
+  height: 2px;
+  box-shadow: 0 0 15px var(--accent-neon);
+}
+
+.mobile-menu-close:hover::after {
+  width: 2px;
+  height: 70%;
+  box-shadow: 0 0 15px var(--accent-neon);
 }
 
 /* --- 7. HERO SECTION (Neon Architecture) --- */
@@ -1012,7 +1130,20 @@ footer {
   }
   .hamburger {
     display: block;
+    cursor: pointer;
   }
+
+  .mobile-menu a {
+    font-size: 2rem;
+  }
+
+  .mobile-menu-close {
+    top: 28px;
+    right: 30px;
+    width: 28px;
+    height: 28px;
+  }
+
   /* Adjust typography safely */
   .hero h1 {
     font-size: 2.8rem;

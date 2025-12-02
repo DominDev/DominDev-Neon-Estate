@@ -155,31 +155,44 @@ const initParallax = () => {
 const initMobileMenu = () => {
   const toggle = document.getElementById("menu-toggle");
   const menu = document.getElementById("mobile-menu");
+  const closeBtn = document.getElementById("menu-close");
   const icon = toggle.querySelector("i");
   let isOpen = false;
 
+  const closeMenu = () => {
+    isOpen = false;
+    menu.classList.remove("active");
+    document.body.classList.remove("menu-open");
+    icon.classList.remove("fa-times");
+    icon.classList.add("fa-bars");
+  };
+
+  const openMenu = () => {
+    isOpen = true;
+    menu.classList.add("active");
+    document.body.classList.add("menu-open");
+    icon.classList.remove("fa-bars");
+    icon.classList.add("fa-times");
+  };
+
   if (toggle && menu) {
+    // Toggle button
     toggle.addEventListener("click", () => {
-      isOpen = !isOpen;
       if (isOpen) {
-        menu.classList.add("active");
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-times");
+        closeMenu();
       } else {
-        menu.classList.remove("active");
-        icon.classList.remove("fa-times");
-        icon.classList.add("fa-bars");
+        openMenu();
       }
     });
 
+    // Close button in menu
+    if (closeBtn) {
+      closeBtn.addEventListener("click", closeMenu);
+    }
+
     // Close menu when clicking links
     menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        isOpen = false;
-        menu.classList.remove("active");
-        icon.classList.remove("fa-times");
-        icon.classList.add("fa-bars");
-      });
+      link.addEventListener("click", closeMenu);
     });
   }
 };
