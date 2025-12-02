@@ -1701,6 +1701,325 @@ footer .container {
   border: none;
 }
 
+/* --- NEON AI ATELIER SECTION --- */
+.ai-atelier-section {
+  background: var(--bg-body);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-atelier-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 800px;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 175, 55, 0.02) 0%,
+    transparent 60%
+  );
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Quote Integration */
+.atelier-quote {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.quote-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  line-height: 1.5;
+  color: var(--accent-neon);
+  font-style: italic;
+  font-weight: 400;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* AI Header */
+.atelier-header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.atelier-header h2 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin: 20px 0 30px;
+  background: linear-gradient(135deg, white 0%, var(--accent-neon) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.atelier-subtitle {
+  color: var(--text-muted);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.atelier-subtitle strong {
+  color: var(--accent-neon);
+  font-weight: 600;
+}
+
+/* Input Wrapper */
+.atelier-input-wrapper {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.input-label-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.input-label {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-label i {
+  color: var(--accent-neon);
+  font-size: 1.1rem;
+}
+
+.input-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Textarea Input */
+.atelier-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  resize: vertical;
+  min-height: 160px;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 25px;
+}
+
+.atelier-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+  font-style: italic;
+}
+
+.atelier-input:focus {
+  outline: none;
+  border-color: var(--accent-neon);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Generate Button */
+#generate-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1rem;
+  padding: 20px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+#generate-btn i {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+#generate-btn:hover i {
+  transform: rotate(15deg) scale(1.1);
+}
+
+#generate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading Animation */
+.loading-dots::after {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+  margin-left: 8px;
+  animation: loadingDots 1.4s infinite;
+}
+
+@keyframes loadingDots {
+  0%, 20% {
+    box-shadow: 8px 0 0 currentColor, 16px 0 0 currentColor;
+  }
+  40% {
+    box-shadow: 8px -4px 0 currentColor, 16px 0 0 currentColor;
+  }
+  60% {
+    box-shadow: 8px 0 0 currentColor, 16px -4px 0 currentColor;
+  }
+  80%, 100% {
+    box-shadow: 8px 0 0 currentColor, 16px 0 0 currentColor;
+  }
+}
+
+/* AI Result Container */
+.atelier-result {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  display: none;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  animation: resultFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes resultFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.atelier-result::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent-neon) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+
+.result-header {
+  padding: 30px 40px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.01);
+  justify-content: space-between;
+}
+
+.copy-concept-btn {
+  background: transparent;
+  border: none;
+  color: rgba(212, 175, 55, 0.4);
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.copy-concept-btn:hover {
+  color: var(--accent-neon);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.copy-concept-btn i {
+  animation: none;
+}
+
+.result-header i {
+  font-size: 1.5rem;
+  color: var(--accent-neon);
+  animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.result-header h4 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  color: var(--accent-neon);
+  margin: 0;
+  font-weight: 400;
+}
+
+.result-content {
+  padding: 40px;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.result-content strong {
+  color: var(--accent-neon);
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 1.1rem;
+}
+
+.result-content strong:first-child {
+  margin-top: 0;
+}
+
 /* --- 13. RESPONSIVE BREAKPOINTS --- */
 
 /* Large Tablets & Small Desktops */
@@ -1868,6 +2187,51 @@ footer .container {
   .quote-content p {
     font-size: clamp(1.3rem, 5vw, 2rem);
     padding: 0 20px;
+  }
+
+  /* AI Atelier Mobile */
+  .atelier-quote {
+    margin-bottom: 50px;
+  }
+
+  .quote-text {
+    font-size: clamp(1.3rem, 5vw, 2rem);
+    padding: 0 20px;
+  }
+
+  .atelier-header {
+    margin-bottom: 40px;
+  }
+
+  .atelier-input-wrapper {
+    margin-bottom: 40px;
+  }
+
+  .input-label-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .atelier-input {
+    padding: 20px;
+    font-size: 1rem;
+    min-height: 140px;
+  }
+
+  #generate-btn {
+    padding: 18px 35px;
+    font-size: 0.95rem;
+  }
+
+  .result-header {
+    padding: 25px 25px 18px;
+    flex-direction: row;
+  }
+
+  .result-content {
+    padding: 30px 25px;
+    font-size: 1rem;
   }
 }
 

@@ -51,6 +51,7 @@
         <!-- Desktop Menu -->
         <ul class="nav-links hover-target">
           <li><a href="#services">Usługi</a></li>
+          <li><a href="#ai-atelier">AI Atelier</a></li>
           <li><a href="#portfolio">Realizacje</a></li>
           <li><a href="#process">Proces</a></li>
           <li><a href="#about">O Studio</a></li>
@@ -72,6 +73,7 @@
       </div>
       <ul>
         <li><a href="#services">Usługi</a></li>
+        <li><a href="#ai-atelier">AI Atelier</a></li>
         <li><a href="#portfolio">Realizacje</a></li>
         <li><a href="#process">Proces</a></li>
         <li><a href="#about">O Studio</a></li>
@@ -207,11 +209,57 @@
       </div>
     </section>
 
-    <!-- 6. QUOTE DIVIDER -->
-    <section class="quote-divider">
+    <!-- 6. NEON AI ATELIER -->
+    <section class="section-padding ai-atelier-section" id="ai-atelier">
       <div class="container">
-        <div class="quote-content reveal">
-          <p>"Neon.Estate nie projektuje mieszkań.<br />Projektuje doświadczenia, w których chce się zamieszkać."</p>
+        <!-- Quote Integration -->
+        <div class="atelier-quote reveal">
+          <p class="quote-text">"Neon.Estate nie projektuje mieszkań.<br />Projektuje doświadczenia, w których chce się zamieszkać."</p>
+        </div>
+
+        <!-- AI Header -->
+        <div class="atelier-header reveal">
+          <span class="tech-badge">Powered by Gemini AI</span>
+          <h2>Neon AI Atelier</h2>
+          <p class="atelier-subtitle">
+            Opisz swoje wymarzone wnętrze. Nasz algorytm przeanalizuje Twoją wizję i przygotuje wstępny koncept architektoniczny w stylu <strong>Quiet Luxury</strong>,
+            sugerując materiały, oświetlenie i atmosferę.
+          </p>
+        </div>
+
+        <!-- Input Area -->
+        <div class="atelier-input-wrapper reveal">
+          <div class="input-label-group">
+            <label for="vision-input" class="input-label">
+              <i class="fa-solid fa-lightbulb"></i>
+              Twoja wizja
+            </label>
+            <span class="input-hint">Bądź szczegółowy - im więcej opiszesz, tym lepszy koncept</span>
+          </div>
+
+          <textarea
+            id="vision-input"
+            class="atelier-input hover-target"
+            placeholder="Przestronny salon z widokiem na las, dużo surowego betonu, ciepłe drewno orzechowe i złote akcenty. Chcę czuć spokój i bliskość natury..."
+            rows="5"
+          ></textarea>
+
+          <button id="generate-btn" class="btn-primary hover-target" onclick="generateConcept()">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Generuj Koncept
+          </button>
+        </div>
+
+        <!-- AI Result -->
+        <div id="ai-result" class="atelier-result">
+          <div class="result-header">
+            <i class="fa-solid fa-sparkles"></i>
+            <h4>Twoja Wizja Architektoniczna</h4>
+            <button id="copy-btn" class="copy-concept-btn hover-target" onclick="copyConcept()" title="Kopiuj koncept">
+              <i class="fa-solid fa-copy"></i>
+            </button>
+          </div>
+          <div id="ai-text" class="result-content"></div>
         </div>
       </div>
     </section>
