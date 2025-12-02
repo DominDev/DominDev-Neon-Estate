@@ -249,7 +249,31 @@ const preventBodyScroll = () => {
   }
 };
 
-// 9. Smooth Scroll for Navigation Links
+// 9. FAQ Accordion
+const initFAQ = () => {
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+
+    question.addEventListener('click', () => {
+      // Toggle current item
+      const isActive = item.classList.contains('active');
+
+      // Close all items
+      faqItems.forEach(otherItem => {
+        otherItem.classList.remove('active');
+      });
+
+      // Open clicked item if it wasn't active
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+};
+
+// 10. Smooth Scroll for Navigation Links
 const initSmoothScroll = () => {
   const links = document.querySelectorAll('a[href^="#"]');
 
@@ -309,6 +333,7 @@ window.addEventListener("load", () => {
     initScrollTop();
     preventBodyScroll();
     initSmoothScroll();
+    initFAQ();
   }, loaderDelay);
 });
 
