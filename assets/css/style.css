@@ -142,8 +142,8 @@ button {
 }
 
 body.hovering .cursor-diamond {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   background: rgba(212, 175, 55, 0.1);
   border-color: var(--accent-neon);
   box-shadow: 0 0 20px var(--accent-glow);
@@ -1316,6 +1316,90 @@ footer .container {
   font-size: 1rem;
 }
 
+/* --- SERVICES SECTION --- */
+.services-section {
+  background: var(--bg-body);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.service-card {
+  position: relative;
+  padding: 50px 35px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.service-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.08);
+  transform: translateY(-5px);
+}
+
+.service-number {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  color: var(--accent-neon);
+  opacity: 0.15;
+  line-height: 1;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.service-card h3 {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  margin-bottom: 15px;
+  font-family: var(--font-serif);
+  color: white;
+}
+
+.service-card > p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+}
+
+.service-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-features li {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 10px 0;
+  padding-left: 25px;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.service-features li:last-child {
+  border-bottom: none;
+}
+
+.service-features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--accent-neon);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
 /* --- PROCESS SECTION --- */
 .process-section {
   background: var(--bg-body);
@@ -1366,9 +1450,97 @@ footer .container {
   font-size: 0.95rem;
 }
 
+/* --- FAQ SECTION --- */
+.faq-section {
+  background: #080808;
+  position: relative;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.faq-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.faq-item:hover {
+  border-color: rgba(212, 175, 55, 0.2);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.05);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 35px;
+  cursor: pointer;
+  transition: var(--transition-snap);
+}
+
+.faq-question:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.faq-question h3 {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-family: var(--font-serif);
+  color: white;
+  font-weight: 400;
+  margin: 0;
+  padding-right: 20px;
+  flex: 1;
+}
+
+.faq-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-neon);
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+  background: rgba(212, 175, 55, 0.1);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 35px;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+  padding: 0 35px 30px 35px;
+}
+
+.faq-answer p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
 /* --- CONTACT SECTION --- */
 .contact-section {
-  background: #080808;
+  background: var(--bg-body);
   position: relative;
 }
 
@@ -1604,6 +1776,23 @@ footer .container {
 
   .process-step {
     padding: 30px 20px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-question {
+    padding: 25px 25px;
+  }
+
+  .faq-item.active .faq-answer {
+    padding: 0 25px 25px 25px;
   }
 
   .contact-grid {
