@@ -312,7 +312,75 @@ const initSmoothScroll = () => {
   });
 };
 
-// 8. Initialization
+// 8. Cursor Spotlight Effect (Subtle Golden Glow)
+const initCursorTrail = () => {
+  // Only run on non-touch devices
+  const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+  if (isTouchDevice) {
+    return; // Skip spotlight on touch devices
+  }
+
+  const canvas = document.getElementById('cursor-trail');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+
+  // Set canvas size to window size
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // Mouse position with smooth following
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let targetX = mouseX;
+  let targetY = mouseY;
+
+  // Track mouse movement
+  window.addEventListener('mousemove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+  });
+
+  // Animation loop
+  function animate() {
+    // Clear canvas completely for clean spotlight
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Smooth follow with easing (laggy cursor effect)
+    mouseX += (targetX - mouseX) * 0.15;
+    mouseY += (targetY - mouseY) * 0.15;
+
+    // Draw subtle spotlight glow
+    const gradient = ctx.createRadialGradient(
+      mouseX, mouseY, 0,
+      mouseX, mouseY, 150
+    );
+
+    // Very subtle golden glow
+    gradient.addColorStop(0, 'rgba(212, 175, 55, 0.15)'); // Center - subtle
+    gradient.addColorStop(0.3, 'rgba(212, 175, 55, 0.08)'); // Mid
+    gradient.addColorStop(0.6, 'rgba(212, 175, 55, 0.03)'); // Outer
+    gradient.addColorStop(1, 'rgba(212, 175, 55, 0)'); // Fade to transparent
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 150, 0, Math.PI * 2);
+    ctx.fill();
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+};
+
+// 9. Initialization
 window.addEventListener("load", () => {
   renderProperties();
 
@@ -329,6 +397,7 @@ window.addEventListener("load", () => {
 
     // Init animations
     initCursor();
+    initCursorTrail();
     initObserver();
     initParallax();
     initMobileMenu();
