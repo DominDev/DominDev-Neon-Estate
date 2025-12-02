@@ -252,22 +252,24 @@ const preventBodyScroll = () => {
 // 9. FAQ Accordion
 const initFAQ = () => {
   const faqItems = document.querySelectorAll('.faq-item');
+  console.log('🔧 FAQ Init: Found', faqItems.length, 'FAQ items');
 
-  faqItems.forEach(item => {
+  faqItems.forEach((item, index) => {
     const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
 
     question.addEventListener('click', () => {
       // Toggle current item
-      const isActive = item.classList.contains('active');
+      const isOpen = item.classList.contains('faq-open');
 
       // Close all items
-      faqItems.forEach(otherItem => {
-        otherItem.classList.remove('active');
+      faqItems.forEach((otherItem) => {
+        otherItem.classList.remove('faq-open');
       });
 
-      // Open clicked item if it wasn't active
-      if (!isActive) {
-        item.classList.add('active');
+      // Open clicked item if it wasn't open
+      if (!isOpen) {
+        item.classList.add('faq-open');
       }
     });
   });

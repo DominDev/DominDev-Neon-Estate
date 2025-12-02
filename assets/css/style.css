@@ -1513,22 +1513,22 @@ footer .container {
   flex-shrink: 0;
 }
 
-.faq-item.active .faq-icon {
+.faq-item.faq-open .faq-icon {
   transform: rotate(45deg);
   background: rgba(212, 175, 55, 0.1);
   box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .faq-answer {
-  max-height: 0;
+  max-height: 0 !important;
   overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 0 35px;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 !important;
 }
 
-.faq-item.active .faq-answer {
-  max-height: 500px;
-  padding: 0 35px 30px 35px;
+.faq-item.faq-open .faq-answer {
+  max-height: 500px !important;
+  padding: 0 35px 30px 35px !important;
 }
 
 .faq-answer p {
@@ -1536,6 +1536,7 @@ footer .container {
   line-height: 1.8;
   font-size: 0.95rem;
   margin: 0;
+  padding: 0;
 }
 
 /* --- CONTACT SECTION --- */
@@ -1791,8 +1792,8 @@ footer .container {
     padding: 25px 25px;
   }
 
-  .faq-item.active .faq-answer {
-    padding: 0 25px 25px 25px;
+  .faq-item.faq-open .faq-answer {
+    padding: 0 25px 25px 25px !important;
   }
 
   .contact-grid {
