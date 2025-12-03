@@ -6,7 +6,7 @@ const properties = [
     location: "Warszawa",
     beds: 4,
     sqm: 320,
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
+    img: "assets/images/portfolio-penthouse.jpg",
     description: "Luksusowy penthouse z panoramicznym widokiem na centrum Warszawy. Minimalistyczna elegancja spotyka funkcjonalność."
   },
   {
@@ -15,7 +15,7 @@ const properties = [
     location: "Gdynia",
     beds: 5,
     sqm: 520,
-    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
+    img: "assets/images/portfolio-rezydencja.jpg",
     description: "Wyjątkowa rezydencja nad morzem z bezpośrednim dostępem do plaży i tarasem widokowym."
   },
   {
@@ -24,7 +24,7 @@ const properties = [
     location: "Kraków",
     beds: 3,
     sqm: 180,
-    img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
+    img: "assets/images/portfolio-aurora.jpg",
     description: "Elegancki apartament w sercu Krakowa. Połączenie historycznego uroku z nowoczesnym designem."
   },
   {
@@ -33,7 +33,7 @@ const properties = [
     location: "Zakopane",
     beds: 6,
     sqm: 450,
-    img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=800&auto=format&fit=crop",
+    img: "assets/images/portfolio-mountain.jpg",
     description: "Ekskluzywna rezydencja górska z widokiem na Tatry. Luksus w harmonii z naturą."
   },
 ];
@@ -52,14 +52,14 @@ const renderProperties = () => {
     card.innerHTML = `
                 <div class="card-image-wrapper">
                     <div class="card-price-tag">${prop.price}</div>
-                    <img src="${prop.img}" alt="${prop.title}">
+                    <img src="${prop.img}" alt="${prop.title} - ${prop.description}" loading="lazy" decoding="async">
                 </div>
                 <div class="card-info">
                     <span class="card-location">${prop.location}</span>
                     <h3 class="card-title">${prop.title}</h3>
                     <div class="card-meta">
-                        <span class="meta-item"><i class="fa-solid fa-bed"></i> ${prop.beds} Sypialnie</span>
-                        <span class="meta-item"><i class="fa-solid fa-ruler-combined"></i> ${prop.sqm} m²</span>
+                        <span class="meta-item"><i class="fa-solid fa-bed" aria-hidden="true"></i> ${prop.beds} Sypialnie</span>
+                        <span class="meta-item"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> ${prop.sqm} m²</span>
                     </div>
                 </div>
             `;
