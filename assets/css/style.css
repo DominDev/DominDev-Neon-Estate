@@ -280,22 +280,108 @@ nav {
 
 .hamburger {
   display: none;
-  color: white;
-  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
   z-index: 1002;
   cursor: pointer;
-  transition: all 0.3s ease;
-  opacity: 1;
+  position: relative;
+  transform: rotate(45deg);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.25);
+  flex-shrink: 0;
 }
 
 .hamburger:hover {
-  transform: scale(1.1);
+  border-color: var(--accent-neon);
+  background: rgba(212, 175, 55, 0.1);
+  box-shadow: 0 0 25px var(--accent-glow);
+  transform: rotate(135deg) scale(1.15);
+}
+
+/* Hide Font Awesome icon */
+.hamburger i {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Create custom hamburger lines */
+.hamburger::before,
+.hamburger::after,
+.hamburger-middle {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 55%;
+  height: 1.5px;
+  background: rgba(212, 175, 55, 0.85);
+  transform: translateX(-50%);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
+}
+
+.hamburger::before {
+  top: 28%;
+}
+
+.hamburger::after {
+  bottom: 28%;
+}
+
+.hamburger-middle {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hamburger:hover::before {
+  width: 70%;
+  top: 25%;
+  height: 2px;
+  background: var(--accent-neon);
+  box-shadow: 0 0 15px var(--accent-neon);
+}
+
+.hamburger:hover::after {
+  width: 70%;
+  bottom: 25%;
+  height: 2px;
+  background: var(--accent-neon);
+  box-shadow: 0 0 15px var(--accent-neon);
+}
+
+.hamburger:hover .hamburger-middle {
+  width: 70%;
+  height: 2px;
+  background: var(--accent-neon);
+  box-shadow: 0 0 15px var(--accent-neon);
 }
 
 /* Hide hamburger when menu is active */
 body.menu-open .hamburger {
   opacity: 0;
   pointer-events: none;
+  transform: rotate(45deg) scale(0.8);
+}
+
+/* Subtle pulse animation for hamburger */
+@keyframes hamburgerPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+  }
+}
+
+.hamburger {
+  animation: hamburgerPulse 3s ease-in-out infinite;
+}
+
+.hamburger:hover {
+  animation: none;
 }
 
 /* Mobile Menu */
@@ -2454,7 +2540,13 @@ footer .container {
 
 /* Touch-friendly tap targets (minimum 44x44px for iOS) */
 @media (hover: none) and (pointer: coarse) {
-  .hamburger,
+  .hamburger {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+  }
+
   .mobile-menu-close {
     min-width: 44px;
     min-height: 44px;
