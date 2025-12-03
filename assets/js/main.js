@@ -178,6 +178,13 @@ const initMobileMenu = () => {
   const icon = toggle.querySelector("i");
   let isOpen = false;
 
+  // Create middle line for hamburger diamond
+  if (toggle && !toggle.querySelector('.hamburger-middle')) {
+    const middleLine = document.createElement('span');
+    middleLine.className = 'hamburger-middle';
+    toggle.appendChild(middleLine);
+  }
+
   const closeMenu = () => {
     isOpen = false;
     menu.classList.remove("active");
