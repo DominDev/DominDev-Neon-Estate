@@ -311,6 +311,7 @@ body.menu-open .hamburger {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 120px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-20px);
@@ -330,27 +331,50 @@ body.menu-open .hamburger {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
 }
 
 .mobile-menu li {
   margin: 0;
+  width: 100%;
+  max-width: 300px;
 }
 
 .mobile-menu a {
   display: block;
   font-family: var(--font-serif);
-  font-size: 2.5rem;
-  color: white;
-  margin: 20px 0;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 12px 20px;
   opacity: 0;
   transform: translateY(20px);
-  transition: 0.4s ease;
+  transition: all 0.4s ease;
   text-align: center;
+  position: relative;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.mobile-menu a::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 0;
+  height: 1px;
+  background: var(--accent-neon);
+  box-shadow: 0 0 8px var(--accent-glow);
+  transform: translateX(-50%);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-menu a:hover {
-  color: var(--accent-neon);
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  color: white;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.mobile-menu a:hover::before {
+  width: 60px;
 }
 
 .mobile-menu.active a {
@@ -387,15 +411,19 @@ body.menu-open .hamburger {
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
   align-items: center;
-  padding: 25px 40px;
-  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  padding: 30px 45px;
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  background: rgba(212, 175, 55, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
   opacity: 0;
   transform: translateX(-50%) translateY(20px);
   transition: 0.6s ease;
   width: calc(100% - 80px);
-  max-width: 400px;
+  max-width: 420px;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.08);
 }
 
 .mobile-menu.active .mobile-menu-contact {
@@ -407,29 +435,33 @@ body.menu-open .hamburger {
 .mobile-contact-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.9rem;
+  gap: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
+  padding: 8px 0;
 }
 
 .mobile-contact-item:hover {
   color: var(--accent-neon);
+  transform: translateX(3px);
 }
 
 .mobile-contact-item i {
   color: var(--accent-neon);
-  font-size: 1rem;
-  opacity: 0.7;
+  font-size: 1.1rem;
+  opacity: 0.85;
   transition: all 0.3s ease;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
 .mobile-contact-item:hover i {
   opacity: 1;
-  transform: scale(1.1);
+  transform: scale(1.15);
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
 }
 
 .mobile-menu-close {
@@ -2124,8 +2156,12 @@ footer .container {
   }
 
   .mobile-menu a {
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
-    margin: 15px 0;
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    padding: 10px 16px;
+  }
+
+  .mobile-menu li {
+    max-width: 280px;
   }
 
   .mobile-menu-close {
@@ -2135,12 +2171,16 @@ footer .container {
 
   .mobile-menu-contact {
     bottom: 30px;
-    padding: 20px 30px;
-    gap: 12px;
+    padding: 25px 35px;
+    gap: 15px;
   }
 
   .mobile-contact-item {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+  }
+
+  .mobile-contact-item i {
+    font-size: 1rem;
   }
 
   .listings-grid {
@@ -2335,24 +2375,32 @@ footer .container {
   }
 
   .mobile-menu a {
-    font-size: clamp(1.5rem, 8vw, 2rem);
-    margin: 12px 0;
+    font-size: clamp(1.4rem, 7vw, 1.8rem);
+    padding: 8px 12px;
+  }
+
+  .mobile-menu li {
+    max-width: 260px;
+  }
+
+  .mobile-menu ul {
+    gap: 4px;
   }
 
   .mobile-menu-contact {
     bottom: 20px;
-    padding: 15px 20px;
-    gap: 10px;
+    padding: 20px 25px;
+    gap: 12px;
     width: calc(100% - 40px);
   }
 
   .mobile-contact-item {
-    font-size: 0.8rem;
-    gap: 10px;
+    font-size: 0.85rem;
+    gap: 12px;
   }
 
   .mobile-contact-item i {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   .card-meta {
