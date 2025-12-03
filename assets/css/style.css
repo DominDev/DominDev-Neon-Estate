@@ -1582,8 +1582,8 @@ footer .container {
 .faq-answer {
   max-height: 0 !important;
   overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 0 !important;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 35px 0 35px !important;
 }
 
 .faq-item.faq-open .faq-answer {
