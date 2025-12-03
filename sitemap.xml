@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://yourdomain.com/</loc>
-    <lastmod>2025-12-02</lastmod>
+    <loc>https://neon.estate.com/</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://neon.estate.com/assets/images/favicon.svg</image:loc>
+      <image:title>Neon Estate - Luxury Architecture Studio</image:title>
+      <image:caption>Studio architektury specjalizujące się w projektowaniu luksusowych apartamentów</image:caption>
+    </image:image>
   </url>
+  <!-- Add more URLs here as the site grows -->
+  <!-- Example:
+  <url>
+    <loc>https://neon.estate.com/portfolio</loc>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  -->
 </urlset>
