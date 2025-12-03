@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="1.2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="32" height="32" rx="3" fill="#050505"/>
+
+  <!-- Diamond cursor shape (rotated square, empty with border) -->
+  <g filter="url(#neonGlow)" transform="translate(16, 16)">
+    <!-- Outer diamond border -->
+    <rect
+      x="-7"
+      y="-7"
+      width="14"
+      height="14"
+      transform="rotate(45)"
+      fill="none"
+      stroke="#d4af37"
+      stroke-width="1.2"/>
+
+    <!-- Center dot -->
+    <circle
+      cx="0"
+      cy="0"
+      r="1.8"
+      fill="#d4af37"/>
+  </g>
+</svg>
