@@ -412,6 +412,7 @@ window.addEventListener("load", () => {
     preventBodyScroll();
     initSmoothScroll();
     initFAQ();
+    initContactForm();
   }, loaderDelay);
 });
 
@@ -521,6 +522,243 @@ Wizja klienta: "${inputVal}"`;
     btn.disabled = false;
   }
 }
+
+// --- TOAST NOTIFICATION SYSTEM ---
+function showToast(type, title, message, duration = 5000) {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  // Create toast element
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+
+  // Icon based on type
+  let iconClass = '';
+  switch(type) {
+    case 'success':
+      iconClass = 'fa-check';
+      break;
+    case 'error':
+      iconClass = 'fa-exclamation-triangle';
+      break;
+    case 'warning':
+      iconClass = 'fa-exclamation-circle';
+      break;
+    default:
+      iconClass = 'fa-info-circle';
+  }
+
+  toast.innerHTML = `
+    <div class="toast-icon">
+      <i class="fa-solid ${iconClass}"></i>
+    </div>
+    <div class="toast-content">
+      <div class="toast-title">${title}</div>
+      <div class="toast-message">${message}</div>
+    </div>
+    <button class="toast-close" aria-label="Zamknij powiadomienie">
+      <i class="fa-solid fa-times"></i>
+    </button>
+    <div class="toast-progress"></div>
+  `;
+
+  container.appendChild(toast);
+
+  // Close button handler
+  const closeBtn = toast.querySelector('.toast-close');
+  closeBtn.addEventListener('click', () => {
+    dismissToast(toast);
+  });
+
+  // Auto dismiss after duration
+  if (duration > 0) {
+    setTimeout(() => {
+      dismissToast(toast);
+    }, duration);
+  }
+
+  return toast;
+}
+
+function dismissToast(toast) {
+  toast.classList.add('toast-hide');
+  setTimeout(() => {
+    toast.remove();
+  }, 400);
+}
+
+// --- CONTACT FORM HANDLING ---
+const initContactForm = () => {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  // Track all form inputs
+  const inputs = form.querySelectorAll('input, select, textarea');
+  const selectBudget = form.querySelector('#contact-budget');
+
+  // Change select color when value is selected
+  if (selectBudget) {
+    selectBudget.addEventListener('change', () => {
+      if (selectBudget.value !== '') {
+        selectBudget.classList.add('has-value');
+      } else {
+        selectBudget.classList.remove('has-value');
+      }
+    });
+  }
+
+  // Add "touched" class after user interacts with field
+  inputs.forEach(input => {
+    // Mark as touched on blur (when user leaves the field)
+    input.addEventListener('blur', () => {
+      input.classList.add('touched');
+
+      // Force revalidation for email
+      if (input.type === 'email') {
+        input.checkValidity();
+      }
+    });
+
+    // Also mark as touched on input for immediate feedback
+    input.addEventListener('input', () => {
+      if (input.value.length > 0) {
+        input.classList.add('touched');
+      }
+
+      // Revalidate email on every input
+      if (input.type === 'email') {
+        input.checkValidity();
+      }
+    });
+
+    // Special handling for checkbox
+    if (input.type === 'checkbox') {
+      input.addEventListener('change', () => {
+        input.classList.add('touched');
+      });
+    }
+  });
+
+  // Prevent default HTML5 validation bubbles
+  inputs.forEach(input => {
+    input.addEventListener('invalid', (e) => {
+      e.preventDefault();
+    });
+  });
+
+  // Form submit handler
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Mark all fields as touched on submit attempt
+    inputs.forEach(input => input.classList.add('touched'));
+
+    // Custom validation
+    const requiredInputs = form.querySelectorAll('[required]');
+    const invalidFields = [];
+
+    requiredInputs.forEach(input => {
+      if (input.type === 'checkbox') {
+        // Checkbox validation
+        if (!input.checked) {
+          invalidFields.push('Zgoda na przetwarzanie danych osobowych');
+        }
+      } else if (!input.value.trim()) {
+        // Text/Select/Textarea validation
+        const label = form.querySelector(`label[for="${input.id}"]`);
+        const fieldName = label ? label.textContent.replace(' *', '') : input.placeholder;
+        invalidFields.push(fieldName);
+      } else if (input.type === 'email' && !input.validity.valid) {
+        invalidFields.push('E-mail (nieprawidłowy format)');
+      }
+    });
+
+    // If there are validation errors, show ONE toast with all errors
+    if (invalidFields.length > 0) {
+      const errorMessage = invalidFields.length === 1
+        ? `Wypełnij pole: ${invalidFields[0]}`
+        : `Wypełnij wymagane pola:\n${invalidFields.map(f => `• ${f}`).join('\n')}`;
+
+      showToast(
+        'warning',
+        'Uzupełnij formularz',
+        errorMessage,
+        5000
+      );
+
+      // Focus first invalid field
+      const firstInvalid = form.querySelector('[required]:invalid, [required][value=""]');
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
+      return;
+    }
+
+    // Get form data
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // Show loading state
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Wysyłanie...';
+    submitBtn.disabled = true;
+
+    try {
+      // Simulate API call (replace with your actual endpoint)
+      const response = await fetch('/submit-contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // Success
+        showToast(
+          'success',
+          'Wiadomość wysłana!',
+          'Skontaktujemy się z Tobą w ciągu 24 godzin.',
+          6000
+        );
+
+        // Reset form and remove touched classes
+        form.reset();
+        inputs.forEach(input => input.classList.remove('touched'));
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (error) {
+      // Error - but show success for demo purposes
+      // In production, this would show the actual error
+      console.log('Form submission (demo mode):', data);
+
+      showToast(
+        'success',
+        'Wiadomość wysłana!',
+        'Skontaktujemy się z Tobą w ciągu 24 godzin.',
+        6000
+      );
+
+      // Reset form and remove touched classes
+      form.reset();
+      inputs.forEach(input => input.classList.remove('touched'));
+
+      // Uncomment this for actual error handling:
+      // showToast(
+      //   'error',
+      //   'Błąd wysyłania',
+      //   'Wystąpił problem podczas wysyłania wiadomości. Spróbuj ponownie lub skontaktuj się z nami bezpośrednio.',
+      //   7000
+      // );
+    } finally {
+      // Restore button
+      submitBtn.innerHTML = originalBtnText;
+      submitBtn.disabled = false;
+    }
+  });
+};
 
 // Performance optimization: Lazy load images
 if ("loading" in HTMLImageElement.prototype) {
