@@ -2356,6 +2356,9 @@ footer .container {
   .btn-secondary {
     width: 100%;
     justify-content: center;
+    padding: 14px 32px;
+    font-size: 0.9rem;
+    border-radius: 40px;
   }
 
   .philosophy-grid {
@@ -2434,8 +2437,13 @@ footer .container {
   }
 
   #generate-btn {
-    padding: 18px 35px;
-    font-size: 0.95rem;
+    padding: 16px 32px;
+    font-size: 0.9rem;
+  }
+
+  .contact-form button[type="submit"] {
+    padding: 16px 32px;
+    font-size: 0.9rem;
   }
 
   .result-header {
@@ -2526,6 +2534,22 @@ footer .container {
     font-size: 0.75rem;
     padding: 10px 20px;
   }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 28px;
+    font-size: 0.85rem;
+  }
+
+  #generate-btn {
+    padding: 14px 28px;
+    font-size: 0.85rem;
+  }
+
+  .contact-form button[type="submit"] {
+    padding: 14px 28px;
+    font-size: 0.85rem;
+  }
 }
 
 /* Extra Small Mobile (iPhone SE, etc.) */
@@ -2553,6 +2577,22 @@ footer .container {
     height: 45px;
     bottom: 16px;
     right: 16px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 11px 24px;
+    font-size: 0.8rem;
+  }
+
+  #generate-btn {
+    padding: 13px 24px;
+    font-size: 0.8rem;
+  }
+
+  .contact-form button[type="submit"] {
+    padding: 13px 24px;
+    font-size: 0.8rem;
   }
 }
 
