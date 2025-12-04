@@ -191,6 +191,9 @@ const initMobileMenu = () => {
     document.body.classList.remove("menu-open");
     icon.classList.remove("fa-times");
     icon.classList.add("fa-bars");
+    // Update ARIA attributes for accessibility
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-hidden', 'true');
   };
 
   const openMenu = () => {
@@ -199,6 +202,9 @@ const initMobileMenu = () => {
     document.body.classList.add("menu-open");
     icon.classList.remove("fa-bars");
     icon.classList.add("fa-times");
+    // Update ARIA attributes for accessibility
+    toggle.setAttribute('aria-expanded', 'true');
+    menu.setAttribute('aria-hidden', 'false');
   };
 
   if (toggle && menu) {
