@@ -293,8 +293,8 @@ nav {
 
 .hamburger {
   display: none;
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   z-index: 1002;
   cursor: pointer;
   position: relative;
@@ -571,8 +571,8 @@ body.menu-open .hamburger {
   z-index: 1003;
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -584,6 +584,7 @@ body.menu-open .hamburger {
 }
 
 @media (max-width: 1024px) {
+  .hamburger,
   .mobile-menu-close {
     right: 30px;
   }
@@ -2252,6 +2253,9 @@ footer .container {
   .hamburger {
     display: block;
     cursor: pointer !important;
+    position: fixed;
+    top: 26px;
+    right: 40px;
   }
 
   .mobile-menu a {
@@ -2263,6 +2267,7 @@ footer .container {
     max-width: 280px;
   }
 
+  .hamburger,
   .mobile-menu-close {
     top: 22px;
     right: var(--container-padding);
@@ -2532,9 +2537,10 @@ footer .container {
     font-size: 0.9rem;
   }
 
+  .hamburger,
   .mobile-menu-close {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
   }
 
   .card-image-wrapper {
@@ -2556,13 +2562,17 @@ footer .container {
   .hamburger {
     min-width: 44px;
     min-height: 44px;
-    width: 44px;
-    height: 44px;
+    width: 28px;
+    height: 28px;
+    padding: 8px;
   }
 
   .mobile-menu-close {
     min-width: 44px;
     min-height: 44px;
+    width: 28px;
+    height: 28px;
+    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
