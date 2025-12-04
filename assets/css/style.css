@@ -439,7 +439,7 @@ body.menu-open .hamburger {
   max-width: 300px;
 }
 
-.mobile-menu a {
+.mobile-menu ul[role="menu"] a {
   display: block;
   font-family: var(--font-serif);
   font-size: 2rem;
@@ -454,7 +454,7 @@ body.menu-open .hamburger {
   letter-spacing: 0.5px;
 }
 
-.mobile-menu a::before {
+.mobile-menu ul[role="menu"] a::before {
   content: '';
   position: absolute;
   left: 50%;
@@ -467,38 +467,38 @@ body.menu-open .hamburger {
   transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.mobile-menu a:hover {
+.mobile-menu ul[role="menu"] a:hover {
   color: white;
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
-.mobile-menu a:hover::before {
+.mobile-menu ul[role="menu"] a:hover::before {
   width: 60px;
 }
 
-.mobile-menu.active a {
+.mobile-menu.active ul[role="menu"] a {
   opacity: 1;
   transform: translateY(0);
 }
-.mobile-menu.active li:nth-child(1) a {
+.mobile-menu.active ul[role="menu"] li:nth-child(1) a {
   transition-delay: 0.1s;
 }
-.mobile-menu.active li:nth-child(2) a {
+.mobile-menu.active ul[role="menu"] li:nth-child(2) a {
   transition-delay: 0.2s;
 }
-.mobile-menu.active li:nth-child(3) a {
+.mobile-menu.active ul[role="menu"] li:nth-child(3) a {
   transition-delay: 0.3s;
 }
-.mobile-menu.active li:nth-child(4) a {
+.mobile-menu.active ul[role="menu"] li:nth-child(4) a {
   transition-delay: 0.4s;
 }
-.mobile-menu.active li:nth-child(5) a {
+.mobile-menu.active ul[role="menu"] li:nth-child(5) a {
   transition-delay: 0.5s;
 }
-.mobile-menu.active li:nth-child(6) a {
+.mobile-menu.active ul[role="menu"] li:nth-child(6) a {
   transition-delay: 0.6s;
 }
-.mobile-menu.active li:nth-child(7) a {
+.mobile-menu.active ul[role="menu"] li:nth-child(7) a {
   transition-delay: 0.7s;
 }
 
@@ -510,19 +510,19 @@ body.menu-open .hamburger {
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
   align-items: center;
-  padding: 30px 45px;
-  border-top: 1px solid rgba(212, 175, 55, 0.25);
-  background: rgba(212, 175, 55, 0.03);
+  padding: 22px 35px;
+  border-top: 2px solid rgba(212, 175, 55, 0.3);
+  background: rgba(212, 175, 55, 0.02);
   backdrop-filter: blur(10px);
   border-radius: 12px;
   opacity: 0;
   transform: translateX(-50%) translateY(20px);
   transition: 0.6s ease;
   width: calc(100% - 80px);
-  max-width: 420px;
-  box-shadow: 0 0 30px rgba(212, 175, 55, 0.08);
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.08);
 }
 
 .mobile-menu.active .mobile-menu-contact {
@@ -534,14 +534,14 @@ body.menu-open .hamburger {
 .mobile-contact-item {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-family: var(--font-sans);
   font-weight: 400;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
 .mobile-contact-item:hover {
@@ -551,7 +551,7 @@ body.menu-open .hamburger {
 
 .mobile-contact-item i {
   color: var(--accent-neon);
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   opacity: 0.85;
   transition: all 0.3s ease;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
@@ -2259,7 +2259,7 @@ footer .container {
     right: 40px;
   }
 
-  .mobile-menu a {
+  .mobile-menu ul[role="menu"] a {
     font-size: clamp(1.6rem, 5vw, 2rem);
     padding: 10px 16px;
   }
@@ -2276,16 +2276,16 @@ footer .container {
 
   .mobile-menu-contact {
     bottom: 30px;
-    padding: 25px 35px;
-    gap: 15px;
+    padding: 20px 30px;
+    gap: 10px;
   }
 
   .mobile-contact-item {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .mobile-contact-item i {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .listings-grid {
@@ -2479,7 +2479,7 @@ footer .container {
     font-size: 1.2rem;
   }
 
-  .mobile-menu a {
+  .mobile-menu ul[role="menu"] a {
     font-size: clamp(1.4rem, 7vw, 1.8rem);
     padding: 8px 12px;
   }
@@ -2494,18 +2494,18 @@ footer .container {
 
   .mobile-menu-contact {
     bottom: 20px;
-    padding: 20px 25px;
-    gap: 12px;
+    padding: 18px 22px;
+    gap: 8px;
     width: calc(100% - 40px);
   }
 
   .mobile-contact-item {
-    font-size: 0.85rem;
-    gap: 12px;
+    font-size: 0.75rem;
+    gap: 8px;
   }
 
   .mobile-contact-item i {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 
   .card-meta {
