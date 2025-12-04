@@ -47,6 +47,27 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Skip Link for Accessibility (WCAG 2.1) */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 10000;
+  padding: 12px 24px;
+  background: var(--accent-neon);
+  color: var(--bg-body);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--accent-neon);
+  outline-offset: 4px;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -505,7 +526,7 @@ body.menu-open .hamburger {
 /* Mobile Menu Contact Section */
 .mobile-menu-contact {
   position: absolute;
-  bottom: 40px;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -838,6 +859,27 @@ body.menu-open .hamburger {
   animation: fadeIn 1s 0.2s forwards;
 }
 
+/* Hero Label variant with stronger glow */
+.hero-label--accent {
+  color: var(--accent-neon);
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Hero Label variant - muted white */
+.hero-label--muted {
+  color: white;
+  opacity: 0.7;
+  margin-bottom: 20px;
+  text-shadow: none;
+}
+
+/* Hero Label variant - accent with custom margin */
+.hero-label--accent-mb {
+  color: var(--accent-neon);
+  text-shadow: 0 0 10px var(--accent-glow);
+  margin-bottom: 20px;
+}
+
 .hero h1 {
   font-size: clamp(3.5rem, 6vw, 6.5rem);
   line-height: 1.05;
@@ -947,6 +989,12 @@ body.menu-open .hamburger {
   border-radius: 50px;
   transition: var(--transition-snap);
   font-weight: 500;
+}
+
+/* Button link variant - accent color */
+.btn-link--accent {
+  border-color: var(--accent-neon);
+  color: var(--accent-neon);
 }
 
 .btn-link:hover {
@@ -1704,8 +1752,8 @@ footer .container {
 }
 
 .faq-icon {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border: 1px solid rgba(212, 175, 55, 0.3);
   display: flex;
   align-items: center;
@@ -3280,5 +3328,50 @@ footer .container {
 
   .hero-overlay {
     background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* --- ACCESSIBILITY: PREFERS REDUCED MOTION --- */
+@media (prefers-reduced-motion: reduce) {
+  /* Restore default cursor for accessibility */
+  * {
+    cursor: auto !important;
+  }
+
+  /* Hide custom cursor elements */
+  .cursor-diamond,
+  #cursor-trail {
+    display: none !important;
+  }
+
+  /* Disable heavy animations */
+  .v-line,
+  .h-line,
+  .floating-prism,
+  .hero-arch-grid {
+    animation: none !important;
+    opacity: 0.3;
+  }
+
+  /* Simplify transitions */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Also disable custom cursor on touch devices and small screens */
+@media (max-width: 1024px), (hover: none) {
+  * {
+    cursor: auto !important;
+  }
+
+  .cursor-diamond,
+  #cursor-trail {
+    display: none !important;
   }
 }
