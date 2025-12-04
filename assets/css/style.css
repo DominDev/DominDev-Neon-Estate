@@ -936,25 +936,25 @@ body.menu-open .hamburger {
 .btn-link {
   font-family: var(--font-sans);
   text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
   color: var(--text-muted);
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 15px 30px;
+  gap: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 16px 36px;
   border-radius: 50px;
-  transition: 0.3s;
+  transition: var(--transition-snap);
+  font-weight: 500;
 }
 
 .btn-link:hover {
   color: var(--accent-neon) !important;
   background: transparent;
   border-color: var(--accent-neon) !important;
-  box-shadow: 0 0 20px var(--accent-glow);
-  gap: 20px;
-  font-weight: 600;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  transform: translateY(-3px);
 }
 
 .listings-grid {
@@ -1355,11 +1355,11 @@ footer .container {
 .btn-primary {
   background: var(--accent-neon);
   color: #050505;
-  padding: 18px 40px;
+  padding: 16px 36px;
   border-radius: 50px;
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: var(--transition-snap);
@@ -1379,11 +1379,11 @@ footer .container {
 .btn-secondary {
   background: transparent;
   color: white;
-  padding: 18px 40px;
+  padding: 16px 36px;
   border-radius: 50px;
   font-family: var(--font-sans);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: var(--transition-snap);
@@ -1888,8 +1888,10 @@ footer .container {
 
 .contact-form button[type="submit"] {
   width: 100%;
+  max-width: 350px;
+  margin: 10px auto 0;
+  display: flex;
   justify-content: center;
-  margin-top: 10px;
   border: none;
 }
 
@@ -2040,12 +2042,14 @@ footer .container {
 /* Generate Button */
 #generate-btn {
   width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  font-size: 1rem;
-  padding: 20px 40px;
+  gap: 10px;
+  font-size: 0.9rem;
+  padding: 16px 36px;
   position: relative;
   overflow: hidden;
 }
@@ -2340,8 +2344,8 @@ footer .container {
   }
 
   .btn-link {
-    padding: 12px 24px;
-    font-size: 0.75rem;
+    padding: 14px 32px;
+    font-size: 0.85rem;
     width: 100%;
     justify-content: center;
   }
@@ -2439,11 +2443,13 @@ footer .container {
   #generate-btn {
     padding: 16px 32px;
     font-size: 0.9rem;
+    max-width: 100%;
   }
 
   .contact-form button[type="submit"] {
     padding: 16px 32px;
     font-size: 0.9rem;
+    max-width: 100%;
   }
 
   .result-header {
@@ -2541,6 +2547,11 @@ footer .container {
     font-size: 0.85rem;
   }
 
+  .btn-link {
+    padding: 12px 28px;
+    font-size: 0.8rem;
+  }
+
   #generate-btn {
     padding: 14px 28px;
     font-size: 0.85rem;
@@ -2583,6 +2594,11 @@ footer .container {
   .btn-secondary {
     padding: 11px 24px;
     font-size: 0.8rem;
+  }
+
+  .btn-link {
+    padding: 11px 24px;
+    font-size: 0.75rem;
   }
 
   #generate-btn {
