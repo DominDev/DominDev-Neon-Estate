@@ -1853,7 +1853,7 @@ footer .container {
   margin-bottom: 25px;
 }
 
-.contact-form input,
+.contact-form input:not([type="checkbox"]),
 .contact-form select,
 .contact-form textarea {
   width: 100%;
@@ -1867,7 +1867,7 @@ footer .container {
   transition: var(--transition-snap);
 }
 
-.contact-form input:focus,
+.contact-form input:not([type="checkbox"]):focus,
 .contact-form select:focus,
 .contact-form textarea:focus {
   outline: none;
@@ -1876,9 +1876,145 @@ footer .container {
   box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
 }
 
-.contact-form input::placeholder,
+.contact-form input:not([type="checkbox"])::placeholder,
 .contact-form textarea::placeholder {
   color: rgba(255, 255, 255, 0.3);
+}
+
+/* Style dla opcji w select (lista rozwijana) */
+.contact-form select option {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.contact-form select option:hover,
+.contact-form select option:focus {
+  background: linear-gradient(90deg, var(--accent-neon) 0%, rgba(212, 175, 55, 0.8) 100%);
+  color: #050505;
+  font-weight: 500;
+}
+
+.contact-form select option:checked {
+  background-color: var(--accent-neon);
+  color: #050505;
+  font-weight: 500;
+}
+
+.contact-form select option:disabled {
+  color: rgba(255, 255, 255, 0.4);
+  background-color: #0f0f0f;
+}
+
+/* Style dla select na urządzeniach mobilnych */
+@supports (-webkit-touch-callout: none) {
+  .contact-form select option {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+  .contact-form select option:checked {
+    background-color: var(--accent-neon);
+    color: #000;
+  }
+}
+
+/* Stylizacja komunikatów walidacji HTML5 - tylko po interakcji */
+.contact-form input:not([type="checkbox"]).touched:invalid,
+.contact-form select.touched:invalid,
+.contact-form textarea.touched:invalid {
+  border-color: rgba(255, 59, 48, 0.5);
+}
+
+.contact-form input:not([type="checkbox"]).touched:invalid:focus,
+.contact-form select.touched:invalid:focus,
+.contact-form textarea.touched:invalid:focus {
+  border-color: #ff3b30;
+  box-shadow: 0 0 20px rgba(255, 59, 48, 0.2);
+}
+
+/* Zielona ramka tylko dla poprawnie wypełnionych pól wymaganych */
+.contact-form input:not([type="checkbox"])[required].touched:valid,
+.contact-form select[required].touched:valid,
+.contact-form textarea[required].touched:valid {
+  border-color: rgba(52, 199, 89, 0.3);
+}
+
+/* Email - musi mieć prawidłowy format */
+.contact-form input[type="email"].touched {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.contact-form input[type="email"].touched:valid {
+  border-color: rgba(52, 199, 89, 0.3);
+}
+
+.contact-form input[type="email"].touched:invalid {
+  border-color: rgba(255, 59, 48, 0.5);
+}
+
+/* Asterisk dla pól wymaganych */
+.form-group label.required::after {
+  content: " *";
+  color: var(--accent-neon);
+  font-weight: 600;
+}
+
+/* Ukryj gwiazdkę w checkbox label */
+.form-group .checkbox-label.required::after {
+  display: none !important;
+}
+
+/* Pokazuj wszystkie labelki */
+.contact-form .form-group label {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0 0 8px 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  border-width: auto;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  display: block;
+}
+
+/* Wyróżnij labelki wymaganych pól */
+.contact-form .form-group label.required {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+/* Checkbox label - nie uppercase, normalny tekst */
+.checkbox-label {
+  text-transform: none;
+  font-size: 0.9rem;
+}
+
+/* Style dla select - kolor placeholder */
+.contact-form select {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.contact-form select:not([value=""]),
+.contact-form select.has-value {
+  color: white;
+}
+
+.contact-form select option:first-child {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.contact-form select option:not(:first-child) {
+  color: white;
 }
 
 .contact-form textarea {
@@ -1886,10 +2022,106 @@ footer .container {
   min-height: 120px;
 }
 
+/* Diamond Checkbox */
+.checkbox-group {
+  margin-bottom: 20px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer !important;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.checkbox-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  max-width: 16px;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  margin: 0;
+  margin-top: 2px;
+}
+
+.checkbox-input:hover {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+}
+
+.checkbox-input:checked {
+  background: var(--accent-neon);
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+}
+
+.checkbox-input:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 3px;
+  height: 7px;
+  border: solid #1a1a1a;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-input.touched:invalid {
+  border-color: rgba(255, 59, 48, 0.5);
+  box-shadow: 0 0 8px rgba(255, 59, 48, 0.2);
+}
+
+.checkbox-text {
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-sans);
+  font-weight: 300;
+}
+
+.privacy-link {
+  color: var(--accent-neon);
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.privacy-link:hover {
+  color: white;
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Form note */
+.form-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 25px;
+  font-family: var(--font-sans);
+  text-align: left;
+}
+
+.required-indicator {
+  color: var(--accent-neon);
+  font-weight: 600;
+  margin-right: 4px;
+}
+
 .contact-form button[type="submit"] {
   width: 100%;
   max-width: 350px;
-  margin: 10px auto 0;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   border: none;
@@ -2214,6 +2446,259 @@ footer .container {
 
 .result-content strong:first-child {
   margin-top: 0;
+}
+
+/* --- TOAST NOTIFICATIONS (Komunikaty) --- */
+.toast-container {
+  position: fixed;
+  top: 100px;
+  right: 40px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  pointer-events: none;
+}
+
+.toast {
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px 25px;
+  min-width: 320px;
+  max-width: 450px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateX(400px);
+  animation: toastSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: all;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes toastSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.toast.toast-hide {
+  animation: toastSlideOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+}
+
+.toast::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-neon);
+}
+
+.toast.toast-success::before {
+  background: linear-gradient(180deg, #34c759 0%, #30d158 100%);
+  box-shadow: 0 0 15px rgba(52, 199, 89, 0.4);
+}
+
+.toast.toast-error::before {
+  background: linear-gradient(180deg, #ff3b30 0%, #ff453a 100%);
+  box-shadow: 0 0 15px rgba(255, 59, 48, 0.4);
+}
+
+.toast.toast-warning::before {
+  background: linear-gradient(180deg, var(--accent-neon) 0%, #d4af37 100%);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.toast-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.toast-success .toast-icon {
+  background: rgba(52, 199, 89, 0.15);
+  color: #34c759;
+  border: 2px solid rgba(52, 199, 89, 0.3);
+  box-shadow: 0 0 20px rgba(52, 199, 89, 0.2);
+}
+
+.toast-error .toast-icon {
+  background: rgba(255, 59, 48, 0.15);
+  color: #ff3b30;
+  border: 2px solid rgba(255, 59, 48, 0.3);
+  box-shadow: 0 0 20px rgba(255, 59, 48, 0.2);
+}
+
+.toast-warning .toast-icon {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--accent-neon);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.toast-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.toast-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.toast-message {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.toast-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  transform: rotate(45deg);
+  position: relative;
+}
+
+.toast-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  transform: rotate(135deg);
+}
+
+/* Ikony w toast close jako + */
+.toast-close::before,
+.toast-close::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+.toast-close::before {
+  width: 50%;
+  height: 1.5px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toast-close::after {
+  width: 1.5px;
+  height: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toast-close i {
+  display: none;
+}
+
+/* Progress bar dla auto-dismiss */
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent-neon);
+  width: 100%;
+  transform-origin: left;
+  animation: toastProgress 5s linear forwards;
+  opacity: 0.4;
+}
+
+@keyframes toastProgress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.toast-success .toast-progress {
+  background: #34c759;
+}
+
+.toast-error .toast-progress {
+  background: #ff3b30;
+}
+
+/* Responsywne style dla toast */
+@media (max-width: 768px) {
+  .toast-container {
+    right: 20px;
+    left: 20px;
+    top: 80px;
+  }
+
+  .toast {
+    min-width: auto;
+    max-width: 100%;
+    padding: 18px 20px;
+  }
+
+  .toast-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .toast-title {
+    font-size: 0.9rem;
+  }
+
+  .toast-message {
+    font-size: 0.8rem;
+  }
 }
 
 /* --- 13. RESPONSIVE BREAKPOINTS --- */
@@ -2560,6 +3045,21 @@ footer .container {
   .contact-form button[type="submit"] {
     padding: 14px 28px;
     font-size: 0.85rem;
+  }
+
+  .checkbox-text {
+    font-size: 0.85rem;
+  }
+
+  .checkbox-diamond {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+  }
+
+  .checkbox-diamond::after {
+    width: 7px;
+    height: 7px;
   }
 }
 
