@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#050505" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <!-- Primary Meta Tags -->
@@ -47,6 +47,11 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+    <!-- Preload Critical Resources for LCP -->
+    <link rel="preload" as="image" href="assets/images/hero-luxury-villa.jpg" fetchpriority="high" />
+    <link rel="preload" as="style" href="assets/css/style.css" />
+    <link rel="preload" as="script" href="assets/js/main.js" />
 
     <!-- Fonts: Playfair Display (Luxury) & Manrope (Modern Tech) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

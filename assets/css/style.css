@@ -1146,7 +1146,8 @@ body.menu-open .hamburger {
   right: 0;
   width: 50%;
   height: 100%;
-  background-image: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1400&auto=format&fit=crop");
+  /* Performance: Self-hosted local image for faster loading */
+  background-image: url("../images/about-bg.jpg");
   background-size: cover;
   background-position: center;
   opacity: 0.4;
@@ -2914,9 +2915,20 @@ footer .container {
     gap: 30px;
   }
 
+  /* Mobile: Keep basic architectural lines (left, right, top, bottom) */
+  /* Hide only heavy elements: prism and glowing center line */
   .floating-prism,
   .v-line.l3 {
     display: none;
+  }
+
+  /* Keep basic frame lines (l1, l2, h1, h2) but optimize for mobile */
+  .v-line.l1,
+  .v-line.l2,
+  .h-line.h1,
+  .h-line.h2 {
+    animation-duration: 1s !important; /* Faster: was 2s */
+    opacity: 0.5; /* Lighter for subtle effect */
   }
 
   .scroll-top {

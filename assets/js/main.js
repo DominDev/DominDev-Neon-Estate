@@ -49,10 +49,11 @@ const renderProperties = () => {
     card.className = "property-card reveal hover-target";
     card.style.transitionDelay = `${index * 150}ms`;
 
+    // Use data-src for lazy loading with IntersectionObserver
     card.innerHTML = `
                 <div class="card-image-wrapper">
                     <div class="card-price-tag">${prop.price}</div>
-                    <img src="${prop.img}" alt="${prop.title} - ${prop.description}" loading="lazy" decoding="async">
+                    <img data-src="${prop.img}" alt="${prop.title} - ${prop.description}" decoding="async" width="420" height="560" style="aspect-ratio: 3/4; background: rgba(255,255,255,0.03);" class="lazy-image">
                 </div>
                 <div class="card-info">
                     <span class="card-location">${prop.location}</span>
@@ -65,6 +66,9 @@ const renderProperties = () => {
             `;
     container.appendChild(card);
   });
+
+  // Initialize lazy loading for portfolio images
+  initLazyLoading();
 };
 
 // 2. Custom Cursor Logic (Diamond) - Only on desktop
@@ -135,6 +139,45 @@ const initObserver = () => {
   document
     .querySelectorAll(".reveal")
     .forEach((el) => observer.observe(el));
+};
+
+// 3.5 Lazy Loading for Images (Performance Optimization)
+const initLazyLoading = () => {
+  const lazyImages = document.querySelectorAll('.lazy-image');
+
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          const src = img.getAttribute('data-src');
+
+          if (src) {
+            img.src = src;
+            img.removeAttribute('data-src');
+            img.classList.remove('lazy-image');
+            img.classList.add('lazy-loaded');
+          }
+
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '50px 0px', // Start loading 50px before entering viewport
+      threshold: 0.01
+    });
+
+    lazyImages.forEach((img) => imageObserver.observe(img));
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    lazyImages.forEach((img) => {
+      const src = img.getAttribute('data-src');
+      if (src) {
+        img.src = src;
+        img.removeAttribute('data-src');
+      }
+    });
+  }
 };
 
 // 4. Parallax Effect (disabled on mobile for performance)
@@ -282,7 +325,6 @@ const preventBodyScroll = () => {
 // 9. FAQ Accordion
 const initFAQ = () => {
   const faqItems = document.querySelectorAll('.faq-item');
-  console.log('🔧 FAQ Init: Found', faqItems.length, 'FAQ items');
 
   faqItems.forEach((item, index) => {
     const question = item.querySelector('.faq-question');
