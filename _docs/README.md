@@ -1,39 +1,77 @@
-# 📚 Neon Estate - SEO Documentation
+# 📚 Neon Estate - Dokumentacja Projektu
 
-**Last Updated:** 2025-12-03
-**Version:** 1.0
+**Last Updated:** 2025-12-05
+**Version:** 1.1
 
 ---
 
 ## 📁 Contents
 
-This directory contains comprehensive SEO documentation for the Neon Estate website.
+This directory contains comprehensive documentation for the Neon Estate website including SEO guides, code review analysis, and development tools setup.
 
 ### Available Documents:
 
-1. **[seo-configuration-guide.md](./quide-seo-configuration.md)**
+#### 🔧 Development Tools
 
+1. **[guide-mcp-setup.md](./guide-mcp-setup.md)** ⭐ NOWY!
+   - Kompletny przewodnik po MCP (Model Context Protocol)
+   - Instalacja i konfiguracja Browser MCP (automatyzacja przeglądarki)
+   - Instalacja i konfiguracja GitMCP (dostęp do dokumentacji GitHub)
+   - Praktyczne przykłady użycia
+   - Rozwiązywanie problemów i best practices
+   - **Start here** jeśli chcesz zainstalować MCP
+
+#### 📊 SEO & Analytics
+
+2. **[guide-seo-configuration.md](./guide-seo-configuration.md)**
    - Complete SEO setup and customization guide
    - 800+ lines of detailed instructions
    - Step-by-step domain change procedures
    - Meta tags and structured data configuration
    - Analytics integration guide
-   - **Start here** if you're new to the project
 
-2. **[SEO-CHANGELOG.md](./SEO-CHANGELOG.md)**
+3. **[SEO-CHANGELOG.md](./SEO-CHANGELOG.md)**
    - Detailed log of all SEO optimizations performed
    - Technical changes summary
    - Performance improvements
    - Files modified list
    - Quality checklist
 
+#### 🔍 Code Review & Analysis
+
+4. **[analysis-code-review-website.md](./analysis-code-review-website.md)**
+   - Comprehensive code review and analysis
+   - Performance, security, accessibility recommendations
+   - Implementation roadmap
+   - Best practices guidelines
+
+5. **[IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md)**
+   - Summary of implemented features and fixes
+   - Section-by-section implementation status
+   - Technical details of changes made
+
+#### 📋 Task Management
+
+6. **[MANUAL-TASKS.md](./MANUAL-TASKS.md)**
+   - Manual tasks and checklists
+   - Deployment procedures
+   - Testing guidelines
+
 ---
 
 ## 🎯 Quick Start
 
+### 🆕 For Setting Up Development Tools:
+
+1. Read [guide-mcp-setup.md](./guide-mcp-setup.md)
+2. Install Browser MCP for browser automation testing
+3. Install GitMCP for AI access to project documentation
+4. Test both servers with `/mcp` command
+5. Start using MCP in daily development workflow
+
 ### For New Website Owners:
 
-1. Read [seo-configuration-guide.md](./quide-seo-configuration.md)
+1. Read [guide-seo-configuration.md](./guide-seo-configuration.md)
 2. Follow the "Critical SEO Elements to Update" section
 3. Update domain references (search & replace)
 4. Customize meta tags and business information
@@ -42,11 +80,11 @@ This directory contains comprehensive SEO documentation for the Neon Estate webs
 
 ### For Developers:
 
-1. Review [SEO-CHANGELOG.md](./SEO-CHANGELOG.md) for all changes
-2. Check the "Files Modified Summary" section
-3. Run validation tools (links provided in guide)
-4. Test structured data with Rich Results Test
-5. Monitor Core Web Vitals after deployment
+1. Review [analysis-code-review-website.md](./analysis-code-review-website.md) for code quality standards
+2. Check [IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md) for implemented features
+3. Review [SEO-CHANGELOG.md](./SEO-CHANGELOG.md) for SEO changes
+4. Install MCP servers from [guide-mcp-setup.md](./guide-mcp-setup.md)
+5. Run validation tools and tests before deployment
 
 ---
 

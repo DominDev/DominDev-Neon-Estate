@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "browsermcp": {
+      "command": "npx",
+      "args": ["@browsermcp/mcp@latest"]
+    },
+    "gitmcp-neon-estate": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/DominDev/DominDev-Neon-Estate"]
+    }
+  }
+}
