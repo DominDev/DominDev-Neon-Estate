@@ -464,6 +464,37 @@
 
         <!-- Input Area -->
         <div class="atelier-input-wrapper reveal">
+          <!-- Project Type -->
+          <div class="input-label-group">
+            <label for="project-type" class="input-label">
+              <i class="fa-solid fa-building"></i>
+              Typ projektu
+            </label>
+          </div>
+          <input
+            type="text"
+            id="project-type"
+            class="atelier-input-small hover-target"
+            placeholder="np. Apartament, Penthouse, Rezydencja, Dom jednorodzinny..."
+            maxlength="100"
+          />
+
+          <!-- Location -->
+          <div class="input-label-group">
+            <label for="location" class="input-label">
+              <i class="fa-solid fa-location-dot"></i>
+              Lokalizacja
+            </label>
+          </div>
+          <input
+            type="text"
+            id="location"
+            class="atelier-input-small hover-target"
+            placeholder="np. Warszawa, Kraków, Gdynia..."
+            maxlength="100"
+          />
+
+          <!-- Vision Description -->
           <div class="input-label-group">
             <label for="vision-input" class="input-label">
               <i class="fa-solid fa-lightbulb"></i>
@@ -477,6 +508,7 @@
             class="atelier-input hover-target"
             placeholder="Przestronny salon z widokiem na las, dużo surowego betonu, ciepłe drewno orzechowe i złote akcenty. Chcę czuć spokój i bliskość natury..."
             rows="5"
+            maxlength="1000"
           ></textarea>
 
           <button id="generate-btn" class="btn-primary hover-target" onclick="generateConcept()">

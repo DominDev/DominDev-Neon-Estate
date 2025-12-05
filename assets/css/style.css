@@ -2321,6 +2321,34 @@ footer .container {
   font-style: italic;
 }
 
+/* Small Text Input (for project type and location) */
+.atelier-input-small {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 18px 20px;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 25px;
+}
+
+.atelier-input-small::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+  font-style: italic;
+}
+
+.atelier-input-small:focus {
+  outline: none;
+  border-color: var(--accent-neon);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.08);
+  transform: translateY(-2px);
+}
+
 /* Textarea Input */
 .atelier-input {
   width: 100%;
