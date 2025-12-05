@@ -1,3 +1,6 @@
+// --- CONFIGURATION ---
+const DEBUG = false; // Set to false for production
+
 // --- DATA SOURCE ---
 const properties = [
   {
@@ -838,7 +841,7 @@ const initContactForm = () => {
     } catch (error) {
       // Error - but show success for demo purposes
       // In production, this would show the actual error
-      console.log('Form submission (demo mode):', data);
+      if (DEBUG) console.log('Form submission (demo mode):', data);
 
       showToast(
         'success',
