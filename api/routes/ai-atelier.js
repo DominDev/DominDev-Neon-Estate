@@ -79,7 +79,9 @@ ${userPrompt}`;
     // Build Gemini API URL
     const apiUrl = `${config.gemini.baseUrl}/${config.gemini.model}:generateContent?key=${config.gemini.apiKey}`;
 
-    console.log(`[AI Atelier] Generating concept for: ${projectType} in ${location}`);
+    if (config.server.isDevelopment) {
+      console.log(`[AI Atelier] Generating concept for: ${projectType} in ${location}`);
+    }
 
     // Call Gemini API with timeout
     const data = await postJSON(
@@ -104,7 +106,9 @@ ${userPrompt}`;
     // Sanitize response with DOMPurify (XSS protection)
     const sanitizedConcept = sanitizeMarkdown(aiResponse);
 
-    console.log(`[AI Atelier] Concept generated successfully (${sanitizedConcept.length} chars)`);
+    if (config.server.isDevelopment) {
+      console.log(`[AI Atelier] Concept generated successfully (${sanitizedConcept.length} chars)`);
+    }
 
     // Return sanitized response
     res.json({
