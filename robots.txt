@@ -7,4 +7,4 @@ Disallow: /_docs/
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://neon.estate.com/sitemap.xml
+Sitemap: https://neon-estate.com/sitemap.xml
