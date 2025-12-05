@@ -13,19 +13,15 @@ Ten plik zawiera quick-start instrukcje instalacji MCP dla projektu Neon Estate.
 Upewnij się, że masz zainstalowane:
 - **Node.js** (najnowsza wersja LTS) - [Download](https://nodejs.org/)
 - **Google Chrome** - Dla Browser MCP
-- **Claude Code** - Oczywiście! 😉
+- **Claude Code (VSCode Extension)** - Oczywiście! 😉
 
-### Krok 2: Instalacja Serwerów MCP
+### Krok 2: Konfiguracja już gotowa! ✅
 
-Uruchom poniższe komendy w terminalu Claude Code:
+**GitMCP jest już skonfigurowany** w [.vscode/mcp.json](.vscode/mcp.json)!
 
-```bash
-# 1. Browser MCP (automatyzacja przeglądarki)
-claude mcp add --transport stdio browsermcp -- npx @browsermcp/mcp@latest
+Właśnie dodałem również **Browser MCP** do konfiguracji.
 
-# 2. GitMCP (dokumentacja projektu GitHub)
-claude mcp add --transport http gitmcp-neon-estate https://gitmcp.io/DominDev/DominDev-Neon-Estate
-```
+Nie musisz uruchamiać żadnych komend - w VSCode konfiguracja MCP działa przez plik `.vscode/mcp.json`.
 
 ### Krok 3: Instalacja Rozszerzenia Chrome (tylko dla Browser MCP)
 
@@ -36,14 +32,16 @@ claude mcp add --transport http gitmcp-neon-estate https://gitmcp.io/DominDev/Do
 
 ### Krok 4: Weryfikacja
 
-```bash
-# Sprawdź status w Claude Code
-/mcp
-```
+**Zrestartuj VSCode** aby załadować nową konfigurację MCP.
 
-Powinieneś zobaczyć dwa serwery:
-- ✅ `browsermcp` - Browser automation
-- ✅ `gitmcp-neon-estate` - GitHub documentation
+Po restarcie sprawdź:
+1. Otwórz panel **MCP** w VSCode (patrz ikonka w lewym panelu)
+2. Powinieneś zobaczyć dwa serwery:
+   - ✅ `DominDev-Neon-Estate Docs` (GitMCP) - 4 tools
+   - ✅ `Browser MCP` - Browser automation tools
+
+**Lub** sprawdź logi MCP:
+- VSCode → Output → Dropdown → "Claude Code: MCP"
 
 ---
 
@@ -98,38 +96,40 @@ Claude powinien:
 
 ---
 
-## 🔧 Alternatywna Instalacja - Ręczna Konfiguracja
+## 🔧 Konfiguracja MCP w VSCode
 
-Jeśli komendy `claude mcp add` nie działają, możesz ręcznie edytować `~/.claude.json`:
+W VSCode (Claude Code Extension), konfiguracja MCP znajduje się w [.vscode/mcp.json](.vscode/mcp.json).
 
-### Windows:
-```
-C:\Users\{username}\.claude.json
-```
-
-### macOS/Linux:
-```
-~/.claude.json
-```
-
-### Zawartość:
+### Aktualna Konfiguracja:
 
 ```json
 {
-  "mcpServers": {
-    "browsermcp": {
+  "servers": {
+    "DominDev-Neon-Estate Docs": {
+      "type": "sse",
+      "url": "https://gitmcp.io/DominDev/DominDev-Neon-Estate"
+    },
+    "Browser MCP": {
+      "type": "stdio",
       "command": "npx",
       "args": ["@browsermcp/mcp@latest"]
-    },
-    "gitmcp-neon-estate": {
-      "command": "npx",
-      "args": ["mcp-remote", "https://gitmcp.io/DominDev/DominDev-Neon-Estate"]
     }
   }
 }
 ```
 
-Po edycji **zrestartuj Claude Code**.
+### Jak Dodać Własny Serwer MCP:
+
+1. Otwórz [.vscode/mcp.json](.vscode/mcp.json)
+2. Dodaj nowy serwer w sekcji `"servers"`:
+   ```json
+   "Nazwa Serwera": {
+     "type": "sse",  // lub "stdio"
+     "url": "https://mcp-server-url.com"
+   }
+   ```
+3. Zapisz plik
+4. Zrestartuj VSCode
 
 ---
 
