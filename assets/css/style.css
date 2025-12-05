@@ -542,7 +542,7 @@ body.menu-open .hamburger {
 /* Mobile Menu Contact Section */
 .mobile-menu-contact {
   position: absolute;
-  bottom: 100px;
+  bottom: max(140px, calc(80px + env(safe-area-inset-bottom))); /* Safe area for URL bar + iOS notch */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -2860,7 +2860,7 @@ footer .container {
 
   .mobile-menu ul[role="menu"] a {
     font-size: clamp(1.6rem, 5vw, 2rem);
-    padding: 10px 16px;
+    padding: 12px 20px; /* Touch-friendly: min 44px height */
   }
 
   .mobile-menu li {
@@ -2874,7 +2874,7 @@ footer .container {
   }
 
   .mobile-menu-contact {
-    bottom: 30px;
+    bottom: max(80px, calc(40px + env(safe-area-inset-bottom))); /* Safe area (768px) */
     padding: 20px 30px;
     gap: 10px;
   }
@@ -2936,6 +2936,12 @@ footer .container {
     right: 20px;
     width: 50px;
     height: 50px;
+  }
+
+  /* Hero section: auto height on mobile for better CTA visibility */
+  .hero {
+    min-height: auto;
+    padding: 120px 0 80px;
   }
 
   .hero-content {
@@ -3113,7 +3119,7 @@ footer .container {
   }
 
   .mobile-menu-contact {
-    bottom: 20px;
+    bottom: max(60px, calc(30px + env(safe-area-inset-bottom))); /* Safe area (480px) */
     padding: 18px 22px;
     gap: 8px;
     width: calc(100% - 40px);
