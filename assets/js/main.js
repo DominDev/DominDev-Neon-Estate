@@ -150,22 +150,31 @@ const initParallax = () => {
   const bg = document.getElementById("parallax-bg");
   const aboutBg = document.getElementById("about-parallax");
 
+  // Throttle scroll with requestAnimationFrame for better performance
+  let ticking = false;
   window.addEventListener("scroll", () => {
-    const scroll = window.scrollY;
-    const windowHeight = window.innerHeight;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scroll = window.scrollY;
+        const windowHeight = window.innerHeight;
 
-    if (scroll < windowHeight && bg) {
-      bg.style.transform = `scale(1.1) translateY(${scroll * 0.4}px)`;
-    }
+        if (scroll < windowHeight && bg) {
+          bg.style.transform = `scale(1.1) translateY(${scroll * 0.4}px)`;
+        }
 
-    if (aboutBg) {
-      const aboutRect = document
-        .querySelector(".about-section")
-        .getBoundingClientRect();
-      if (aboutRect.top < windowHeight && aboutRect.bottom > 0) {
-        const offset = (windowHeight - aboutRect.top) * 0.1;
-        aboutBg.style.transform = `translateY(${offset}px)`;
-      }
+        if (aboutBg) {
+          const aboutRect = document
+            .querySelector(".about-section")
+            .getBoundingClientRect();
+          if (aboutRect.top < windowHeight && aboutRect.bottom > 0) {
+            const offset = (windowHeight - aboutRect.top) * 0.1;
+            aboutBg.style.transform = `translateY(${offset}px)`;
+          }
+        }
+
+        ticking = false;
+      });
+      ticking = true;
     }
   });
 };
@@ -233,11 +242,19 @@ const initMobileMenu = () => {
 const initScrollTop = () => {
   const btn = document.getElementById("scrollTopBtn");
 
+  // Throttle scroll with requestAnimationFrame for better performance
+  let ticking = false;
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 500) {
-      btn.classList.add("visible");
-    } else {
-      btn.classList.remove("visible");
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 500) {
+          btn.classList.add("visible");
+        } else {
+          btn.classList.remove("visible");
+        }
+        ticking = false;
+      });
+      ticking = true;
     }
   });
 
@@ -395,7 +412,11 @@ const initCursorTrail = () => {
 
 // 9. Initialization
 window.addEventListener("load", () => {
-  renderProperties();
+  try {
+    renderProperties();
+  } catch (error) {
+    console.error('Error rendering properties:', error);
+  }
 
   // Hide Loader with faster timing on mobile
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
@@ -408,17 +429,25 @@ window.addEventListener("load", () => {
       loader.style.visibility = "hidden";
     }
 
-    // Init animations
-    initCursor();
-    initCursorTrail();
-    initObserver();
-    initParallax();
-    initMobileMenu();
-    initScrollTop();
-    preventBodyScroll();
-    initSmoothScroll();
-    initFAQ();
-    initContactForm();
+    // Init animations with error handling to prevent one failure from breaking others
+    const safeInit = (fn, name) => {
+      try {
+        fn();
+      } catch (error) {
+        console.error(`Error initializing ${name}:`, error);
+      }
+    };
+
+    safeInit(initCursor, 'cursor');
+    safeInit(initCursorTrail, 'cursor trail');
+    safeInit(initObserver, 'observer');
+    safeInit(initParallax, 'parallax');
+    safeInit(initMobileMenu, 'mobile menu');
+    safeInit(initScrollTop, 'scroll to top');
+    safeInit(preventBodyScroll, 'body scroll prevention');
+    safeInit(initSmoothScroll, 'smooth scroll');
+    safeInit(initFAQ, 'FAQ');
+    safeInit(initContactForm, 'contact form');
   }, loaderDelay);
 });
 
@@ -445,15 +474,39 @@ function copyConcept() {
   });
 }
 
+/**
+ * AI Concept Generation with Backend Integration
+ *
+ * CONFIGURATION:
+ * Set API_BASE_URL to your deployed backend URL:
+ * - Development: http://localhost:3000
+ * - Production: https://your-backend-domain.com (e.g., Vercel, Heroku)
+ *
+ * IMPORTANT: Backend must be running for this to work!
+ * See api/server.js for deployment instructions.
+ */
+const API_BASE_URL = 'http://localhost:3000'; // ⚠️ CHANGE THIS TO YOUR DEPLOYED BACKEND URL
+
 async function generateConcept() {
-  const inputVal = document.getElementById('vision-input').value;
+  // Get form values
+  const projectType = document.getElementById('project-type').value.trim();
+  const location = document.getElementById('location').value.trim();
+  const description = document.getElementById('vision-input').value.trim();
   const btn = document.getElementById('generate-btn');
   const resultBox = document.getElementById('ai-result');
   const resultText = document.getElementById('ai-text');
 
   // Validation
-  if (!inputVal.trim()) {
-    alert("Proszę wpisać wizję wnętrza.");
+  if (!projectType) {
+    alert("Proszę wpisać typ projektu.");
+    return;
+  }
+  if (!location) {
+    alert("Proszę wpisać lokalizację.");
+    return;
+  }
+  if (!description || description.length < 10) {
+    alert("Proszę wpisać szczegółowy opis wizji (minimum 10 znaków).");
     return;
   }
 
@@ -464,66 +517,71 @@ async function generateConcept() {
   resultBox.style.display = 'none';
   resultText.innerHTML = '';
 
-  // API Configuration
-  const apiKey = "AIzaSyCIzGv1ZWOVReT18hy1luxG6-flzSu9H8w";
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-
-  // System Prompt - Poetycki z delikatnymi akcentami technicznymi
-  const systemPrompt = `Jesteś architektem Neon.Estate, mistrzem stylu 'Quiet Luxury'.
-
-Stwórz ekskluzywny, poetycki koncept architektoniczny. WAŻNE: Odpowiedź musi być zwięzła i malownicza, z subtelnymi akcentami technicznymi.
-
-Format (Markdown **pogrubienia**):
-
-**Wizja:**
-Jedno poetyckie zdanie - metafora przestrzeni i emocji, które wzbudza.
-
-**Palette:**
-Wymień 3-4 luksusowe materiały z pełnymi nazwami (np. "marmur Calacatta Oro", "dąb wędzony bielony").
-Dodaj JEDNO krótkie zdanie o tym, jak współgrają.
-
-**Światło & Technologia:**
-Maksymalnie 2 zdania: naturalne światło + oświetlenie architektoniczne + niewidzialna integracja smart home (BEZ szczegółów technicznych jak CCT, lux, Hz - tylko poetycki opis funkcji: "sterowanie scenami świetlnymi", "automatyka klimatu").
-
-Ton: Elitarny, malowniczy, z subtelną wzmianką o technologii (NIE specyfikacja techniczna!).
-
-Wizja klienta: "${inputVal}"`;
+  // AbortController for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 45000); // 45s timeout
 
   try {
-    const response = await fetch(url, {
+    // Call backend API
+    const response = await fetch(`${API_BASE_URL}/api/ai-atelier/generate-concept`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        contents: [{
-          parts: [{ text: systemPrompt }]
-        }]
-      })
+        projectType,
+        location,
+        description,
+      }),
+      signal: controller.signal,
     });
 
-    if (!response.ok) throw new Error('API Error');
+    clearTimeout(timeoutId);
 
+    // Handle non-OK responses
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ error: 'Nieznany błąd' }));
+      throw new Error(errorData.error || `HTTP ${response.status}`);
+    }
+
+    // Parse successful response
     const data = await response.json();
-    const aiResponse = data.candidates[0].content.parts[0].text;
 
-    // Format Markdown to HTML (złote pogrubienia + czyszczenie)
-    const formattedResponse = aiResponse
-      .replace(/###\s*/g, '') // Usuń nagłówki markdown ###
-      .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--accent-neon)">$1</strong>')
-      .replace(/\n/g, '<br>');
+    if (!data.success || !data.data?.concept) {
+      throw new Error('Nieprawidłowa odpowiedź z serwera');
+    }
 
-    resultText.innerHTML = formattedResponse;
+    // Display sanitized concept (already sanitized by backend)
+    resultText.innerHTML = data.data.concept;
     resultBox.style.display = 'block';
 
     // Smooth scroll to result
     resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
   } catch (error) {
-    console.error(error);
-    resultText.innerHTML = "Przepraszamy, nasz wirtualny architekt jest chwilowo zajęty. Spróbuj ponownie za chwilę.";
+    clearTimeout(timeoutId);
+    console.error('AI Generation Error:', error);
+
+    let errorMessage = 'Przepraszamy, wystąpił błąd. Spróbuj ponownie za chwilę.';
+
+    // Specific error messages
+    if (error.name === 'AbortError') {
+      errorMessage = 'Zapytanie przekroczyło limit czasu. Spróbuj ponownie.';
+    } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+      errorMessage = `
+        <p style="color: #d4af37; font-weight: 600;">⚠️ Nie można połączyć z serwerem</p>
+        <p>Upewnij się, że backend jest uruchomiony na: <code style="color: #d4af37;">${API_BASE_URL}</code></p>
+        <p>Instrukcje uruchomienia znajdziesz w pliku: <code>api/server.js</code></p>
+      `;
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+
+    resultText.innerHTML = errorMessage;
     resultBox.style.display = 'block';
+
   } finally {
+    // Reset button state
     btn.innerHTML = originalBtnText;
     btn.disabled = false;
   }

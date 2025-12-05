@@ -1,0 +1,32 @@
+{
+  "name": "neon-estate-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Neon Estate AI Atelier",
+  "type": "module",
+  "main": "api/server.js",
+  "scripts": {
+    "dev": "node --watch api/server.js",
+    "start": "node api/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "neon-estate",
+    "api",
+    "gemini",
+    "ai-atelier"
+  ],
+  "author": "Neon Estate",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
+    "dompurify": "^3.2.2",
+    "jsdom": "^25.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
