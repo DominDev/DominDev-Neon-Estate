@@ -3329,6 +3329,15 @@ footer .container {
   .floating-prism {
     animation: none;
   }
+
+  /* Show standard cursor for better accessibility */
+  * {
+    cursor: auto !important;
+  }
+
+  .cursor-diamond {
+    display: none !important;
+  }
 }
 
 /* High contrast mode support */
