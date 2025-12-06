@@ -7,7 +7,32 @@
   "scripts": {
     "dev": "node --watch api/server.js",
     "start": "node api/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node _scripts/test-runner.js",
+    "test:browser": "node _scripts/mcp-tests/browser/01-basic.js",
+    "test:browser:seo": "node _scripts/mcp-tests/browser/02-seo-audit.js",
+    "test:browser:forms": "node _scripts/mcp-tests/browser/03-forms.js",
+    "test:browser:mobile": "node _scripts/mcp-tests/browser/04-mobile-menu.js",
+    "test:browser:sections": "node _scripts/mcp-tests/browser/05-all-sections.js",
+    "test:browser:links": "node _scripts/mcp-tests/browser/06-verify-links.js",
+    "test:browser:perf": "node _scripts/mcp-tests/browser/07-performance.js",
+    "test:browser:ai": "node _scripts/mcp-tests/browser/08-ai-atelier.js",
+    "test:browser:hover": "node _scripts/mcp-tests/browser/09-hover-effects.js",
+    "test:browser:audit": "node _scripts/mcp-tests/browser/10-complete-audit.js",
+    "test:gitmcp": "node _scripts/mcp-tests/gitmcp/11-docs.js",
+    "test:gitmcp:search": "node _scripts/mcp-tests/gitmcp/12-search-docs.js",
+    "test:gitmcp:code": "node _scripts/mcp-tests/gitmcp/13-code-search.js",
+    "test:gitmcp:structure": "node _scripts/mcp-tests/gitmcp/14-structure.js",
+    "test:gitmcp:list": "node _scripts/mcp-tests/gitmcp/15-list-docs.js",
+    "test:gitmcp:security": "node _scripts/mcp-tests/gitmcp/16-security.js",
+    "test:gitmcp:seo": "node _scripts/mcp-tests/gitmcp/17-seo-changelog.js",
+    "test:combined": "node _scripts/mcp-tests/combined/18-test-and-docs.js",
+    "test:combined:design": "node _scripts/mcp-tests/combined/19-design-system.js",
+    "test:combined:deploy": "node _scripts/mcp-tests/combined/20-pre-deployment.js",
+    "test:combined:docreview": "node _scripts/mcp-tests/combined/21-doc-review.js",
+    "test:combined:security": "node _scripts/mcp-tests/combined/22-security-audit.js",
+    "test:combined:perf": "node _scripts/mcp-tests/combined/23-performance.js",
+    "test:combined:a11y": "node _scripts/mcp-tests/combined/24-accessibility.js",
+    "test:combined:full": "node _scripts/mcp-tests/combined/25-complete-audit.js"
   },
   "keywords": [
     "neon-estate",
@@ -24,7 +49,8 @@
     "express-rate-limit": "^7.4.1",
     "helmet": "^8.0.0",
     "dompurify": "^3.2.2",
-    "jsdom": "^25.0.1"
+    "jsdom": "^25.0.1",
+    "@modelcontextprotocol/sdk": "^1.0.0"
   },
   "engines": {
     "node": ">=18.0.0"

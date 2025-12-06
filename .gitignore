@@ -32,3 +32,6 @@ yarn-error.log*
 **/config/secrets.js
 **/*secret*.json
 **/*credentials*.json
+
+# Scripts
+_scripts/

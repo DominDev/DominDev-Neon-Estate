@@ -21,16 +21,24 @@ This directory contains comprehensive documentation for the Neon Estate website 
    - Rozwiązywanie problemów i best practices
    - **Start here** jeśli chcesz zainstalować MCP
 
+2. **[guide-mcp-testing-scenarios.md](./guide-mcp-testing-scenarios.md)** ⭐ NOWY!
+   - 25 gotowych scenariuszy testowych MCP
+   - Użycie przez Claude Code chat (najłatwiejsze)
+   - Użycie przez skrypty Node.js (automatyzacja)
+   - Scenariusze Browser MCP, GitMCP i Combined
+   - Instrukcje uruchamiania testów
+   - **Start here** aby przetestować MCP
+
 #### 📊 SEO & Analytics
 
-2. **[guide-seo-configuration.md](./guide-seo-configuration.md)**
+3. **[guide-seo-configuration.md](./guide-seo-configuration.md)**
    - Complete SEO setup and customization guide
    - 800+ lines of detailed instructions
    - Step-by-step domain change procedures
    - Meta tags and structured data configuration
    - Analytics integration guide
 
-3. **[SEO-CHANGELOG.md](./SEO-CHANGELOG.md)**
+4. **[SEO-CHANGELOG.md](./SEO-CHANGELOG.md)**
    - Detailed log of all SEO optimizations performed
    - Technical changes summary
    - Performance improvements
@@ -39,20 +47,20 @@ This directory contains comprehensive documentation for the Neon Estate website 
 
 #### 🔍 Code Review & Analysis
 
-4. **[analysis-code-review-website.md](./analysis-code-review-website.md)**
+5. **[analysis-code-review-website.md](./analysis-code-review-website.md)**
    - Comprehensive code review and analysis
    - Performance, security, accessibility recommendations
    - Implementation roadmap
    - Best practices guidelines
 
-5. **[IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md)**
+6. **[IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md)**
    - Summary of implemented features and fixes
    - Section-by-section implementation status
    - Technical details of changes made
 
 #### 📋 Task Management
 
-6. **[MANUAL-TASKS.md](./MANUAL-TASKS.md)**
+7. **[MANUAL-TASKS.md](./MANUAL-TASKS.md)**
    - Manual tasks and checklists
    - Deployment procedures
    - Testing guidelines
