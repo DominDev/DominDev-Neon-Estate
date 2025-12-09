@@ -576,15 +576,45 @@ window.addEventListener("load", () => {
     safeInit(initSmoothScroll, 'smooth scroll');
     safeInit(initFAQ, 'FAQ');
     safeInit(initContactForm, 'contact form');
+    safeInit(initAIAtelier, 'AI Atelier');
   }, loaderDelay);
 });
 
 // --- GEMINI API INTEGRATION (Neon AI Atelier) ---
 
+/**
+ * API_BASE_URL Configuration
+ *
+ * - Development: http://localhost:3000
+ * - Production: Set via window.ENV.API_URL or environment variable
+ *
+ * IMPORTANT: Backend must be running for this to work!
+ * See api/server.js for deployment instructions.
+ */
+const API_BASE_URL = window.ENV?.API_URL || 'http://localhost:3000';
+
+// Initialize AI Atelier event listeners
+const initAIAtelier = () => {
+  const generateBtn = document.getElementById('generate-btn');
+  const copyBtn = document.getElementById('copy-btn');
+
+  if (generateBtn) {
+    generateBtn.addEventListener('click', generateConcept);
+  }
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', copyConcept);
+  }
+};
+
 // Copy Concept to Clipboard
 function copyConcept() {
   const resultText = document.getElementById('ai-text').innerText;
   const copyBtn = document.getElementById('copy-btn');
+
+  if (!resultText || resultText.trim() === '') {
+    return;
+  }
 
   navigator.clipboard.writeText(resultText).then(() => {
     // Visual feedback
@@ -602,19 +632,7 @@ function copyConcept() {
   });
 }
 
-/**
- * AI Concept Generation with Backend Integration
- *
- * CONFIGURATION:
- * Set API_BASE_URL to your deployed backend URL:
- * - Development: http://localhost:3000
- * - Production: https://your-backend-domain.com (e.g., Vercel, Heroku)
- *
- * IMPORTANT: Backend must be running for this to work!
- * See api/server.js for deployment instructions.
- */
-const API_BASE_URL = 'http://localhost:3000'; // ⚠️ CHANGE THIS TO YOUR DEPLOYED BACKEND URL
-
+// Generate AI Concept
 async function generateConcept() {
   // Get form values
   const projectType = document.getElementById('project-type').value.trim();
@@ -696,11 +714,16 @@ async function generateConcept() {
     if (error.name === 'AbortError') {
       errorMessage = 'Zapytanie przekroczyło limit czasu. Spróbuj ponownie.';
     } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-      errorMessage = `
-        <p style="color: #d4af37; font-weight: 600;">⚠️ Nie można połączyć z serwerem</p>
-        <p>Upewnij się, że backend jest uruchomiony na: <code style="color: #d4af37;">${API_BASE_URL}</code></p>
-        <p>Instrukcje uruchomienia znajdziesz w pliku: <code>api/server.js</code></p>
-      `;
+      // Show detailed error only in development
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        errorMessage = `
+          <p style="color: #d4af37; font-weight: 600;">⚠️ Nie można połączyć z serwerem</p>
+          <p>Upewnij się, że backend jest uruchomiony na: <code style="color: #d4af37;">${API_BASE_URL}</code></p>
+          <p>Instrukcje uruchomienia znajdziesz w pliku: <code>api/server.js</code></p>
+        `;
+      } else {
+        errorMessage = 'Nie można połączyć się z serwerem. Spróbuj ponownie za chwilę.';
+      }
     } else if (error.message) {
       errorMessage = error.message;
     }
