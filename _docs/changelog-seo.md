@@ -138,8 +138,8 @@ Complete SEO optimization performed on the Neon Estate website, implementing bes
 ### 📚 ETAP 6: Documentation
 
 **Files Created:**
-- `_docs/seo-configuration-guide.md`
-- `_docs/SEO-CHANGELOG.md`
+- `_docs/guide-seo-configuration.md`
+- `_docs/changelog-seo.md`
 
 **Contents:**
 - ✅ Comprehensive 400+ line SEO configuration guide
@@ -258,8 +258,8 @@ All optimizations have been validated against:
 | sitemap.xml | 24 lines | Modified |
 | assets/css/style.css | +13 lines | Added .sr-only |
 | assets/js/main.js | ~8 lines | Modified (alt + lazy) |
-| _docs/seo-configuration-guide.md | 800+ lines | Created |
-| _docs/SEO-CHANGELOG.md | This file | Created |
+| _docs/guide-seo-configuration.md | 800+ lines | Created |
+| _docs/changelog-seo.md | This file | Created |
 
 **Total Files Modified:** 7
 **Total Lines Changed:** ~1000+
@@ -277,7 +277,7 @@ All optimizations have been validated against:
 - **Business Hours:** Mon-Fri, 9:00-17:00
 
 ### When Domain Changes:
-Refer to `_docs/seo-configuration-guide.md` for complete instructions on updating all domain references.
+Refer to `_docs/guide-seo-configuration.md` for complete instructions on updating all domain references.
 
 ---
 
@@ -302,7 +302,7 @@ Refer to `_docs/seo-configuration-guide.md` for complete instructions on updatin
 ## 📞 Support
 
 For questions about these optimizations:
-1. Refer to `_docs/seo-configuration-guide.md`
+1. Refer to `_docs/guide-seo-configuration.md`
 2. Use Google Search Console Help Center
 3. Consult Schema.org documentation
 

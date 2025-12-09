@@ -65,10 +65,10 @@ api/
 
 ### Root:
 ```
-├── package.json               # Dependencies + scripts (npm run dev/start)
-├── .env.example               # Template z instrukcjami
-├── vercel.json                # Vercel deployment config
-└── IMPLEMENTATION-SUMMARY.md  # Ten plik
+├── package.json                        # Dependencies + scripts (npm run dev/start)
+├── .env.example                        # Template z instrukcjami
+├── vercel.json                         # Vercel deployment config
+└── report-backend-implementation.md    # Ten plik
 ```
 
 ### Frontend (Modified):
