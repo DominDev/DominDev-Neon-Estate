@@ -10,6 +10,9 @@ build/
 .vscode/
 .idea/
 .claude/
+*.swp
+*.swo
+*~
 
 # OS
 .DS_Store
@@ -33,5 +36,39 @@ yarn-error.log*
 **/*secret*.json
 **/*credentials*.json
 
-# Scripts
-_scripts/
+# Optional Folders
+_temp/
+_output/
+_archive/
+_project_snapshots/
+
+# Backups
+backup-*.zip
+*.backup
+*.bak
+
+# Image originals (za duże do commitowania - tylko optimized variants w repo)
+assets/images/originals/*.jpg
+assets/images/originals/*.png
+assets/images/originals/*.jpeg
+assets/images/originals/*.webp
+assets/images/originals/*.tiff
+assets/images/originals/*.gif
+
+# Keep originals folder structure but empty
+!assets/images/originals/.gitkeep
+
+# Generated optimized images (opcjonalnie - zależnie od strategii)
+# Jeśli chcesz commitować optimized images, zakomentuj poniższe linie:
+# assets/images/*-400.avif
+# assets/images/*-400.webp
+# assets/images/*-400.jpg
+# assets/images/*-800.avif
+# assets/images/*-800.webp
+# assets/images/*-800.jpg
+# assets/images/*-1200.avif
+# assets/images/*-1200.webp
+# assets/images/*-1200.jpg
+# assets/images/*-1600.avif
+# assets/images/*-1600.webp
+# assets/images/*-1600.jpg

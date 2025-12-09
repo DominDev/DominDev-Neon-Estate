@@ -46,17 +46,62 @@ const properties = [
 // 1. Render Properties
 const container = document.getElementById("listings-container");
 
+// Helper function to generate responsive picture element
+const generatePictureHTML = (imgPath, alt, width = "420", height = "280") => {
+  // Extract filename without extension (e.g., "portfolio-penthouse" from "assets/images/portfolio-penthouse.jpg")
+  const pathParts = imgPath.split('/');
+  const filename = pathParts[pathParts.length - 1].replace(/\.(jpg|jpeg|png|webp)$/i, '');
+  const basePath = pathParts.slice(0, -1).join('/');
+
+  return `
+    <picture>
+      <source
+        type="image/avif"
+        data-srcset="
+          ${basePath}/${filename}-400.avif 400w,
+          ${basePath}/${filename}-800.avif 800w
+        "
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 420px"
+      />
+      <source
+        type="image/webp"
+        data-srcset="
+          ${basePath}/${filename}-400.webp 400w,
+          ${basePath}/${filename}-800.webp 800w
+        "
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 420px"
+      />
+      <img
+        data-src="${basePath}/${filename}-800.jpg"
+        data-srcset="
+          ${basePath}/${filename}-400.jpg 400w,
+          ${basePath}/${filename}-800.jpg 800w
+        "
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 420px"
+        alt="${alt}"
+        decoding="async"
+        width="${width}"
+        height="${height}"
+        style="aspect-ratio: 3/4; background: rgba(255,255,255,0.03);"
+        class="lazy-image"
+      />
+    </picture>
+  `;
+};
+
 const renderProperties = () => {
   properties.forEach((prop, index) => {
     const card = document.createElement("div");
     card.className = "property-card reveal hover-target";
     card.style.transitionDelay = `${index * 150}ms`;
 
-    // Use data-src for lazy loading with IntersectionObserver
+    // Generate responsive picture element
+    const pictureHTML = generatePictureHTML(prop.img, `${prop.title} - ${prop.description}`);
+
     card.innerHTML = `
                 <div class="card-image-wrapper">
                     <div class="card-price-tag">${prop.price}</div>
-                    <img data-src="${prop.img}" alt="${prop.title} - ${prop.description}" decoding="async" width="420" height="560" style="aspect-ratio: 3/4; background: rgba(255,255,255,0.03);" class="lazy-image">
+                    ${pictureHTML}
                 </div>
                 <div class="card-info">
                     <span class="card-location">${prop.location}</span>
@@ -154,13 +199,35 @@ const initLazyLoading = () => {
         if (entry.isIntersecting) {
           const img = entry.target;
           const src = img.getAttribute('data-src');
+          const srcset = img.getAttribute('data-srcset');
 
+          // Load the main image
           if (src) {
             img.src = src;
             img.removeAttribute('data-src');
-            img.classList.remove('lazy-image');
-            img.classList.add('lazy-loaded');
           }
+
+          // Load srcset if available
+          if (srcset) {
+            img.srcset = srcset;
+            img.removeAttribute('data-srcset');
+          }
+
+          // Also handle <source> elements in parent <picture>
+          const picture = img.closest('picture');
+          if (picture) {
+            const sources = picture.querySelectorAll('source[data-srcset]');
+            sources.forEach(source => {
+              const sourceSrcset = source.getAttribute('data-srcset');
+              if (sourceSrcset) {
+                source.srcset = sourceSrcset;
+                source.removeAttribute('data-srcset');
+              }
+            });
+          }
+
+          img.classList.remove('lazy-image');
+          img.classList.add('lazy-loaded');
 
           observer.unobserve(img);
         }
@@ -175,9 +242,29 @@ const initLazyLoading = () => {
     // Fallback for browsers without IntersectionObserver
     lazyImages.forEach((img) => {
       const src = img.getAttribute('data-src');
+      const srcset = img.getAttribute('data-srcset');
+
       if (src) {
         img.src = src;
         img.removeAttribute('data-src');
+      }
+
+      if (srcset) {
+        img.srcset = srcset;
+        img.removeAttribute('data-srcset');
+      }
+
+      // Also handle <source> elements in parent <picture>
+      const picture = img.closest('picture');
+      if (picture) {
+        const sources = picture.querySelectorAll('source[data-srcset]');
+        sources.forEach(source => {
+          const sourceSrcset = source.getAttribute('data-srcset');
+          if (sourceSrcset) {
+            source.srcset = sourceSrcset;
+            source.removeAttribute('data-srcset');
+          }
+        });
       }
     });
   }
@@ -193,7 +280,7 @@ const initParallax = () => {
     return; // Skip parallax on mobile and for users who prefer reduced motion
   }
 
-  const bg = document.getElementById("parallax-bg");
+  // Only parallax for about section (hero no longer has background image)
   const aboutBg = document.getElementById("about-parallax");
 
   // Throttle scroll with requestAnimationFrame for better performance
@@ -203,10 +290,6 @@ const initParallax = () => {
       window.requestAnimationFrame(() => {
         const scroll = window.scrollY;
         const windowHeight = window.innerHeight;
-
-        if (scroll < windowHeight && bg) {
-          bg.style.transform = `scale(1.1) translateY(${scroll * 0.4}px)`;
-        }
 
         if (aboutBg) {
           const aboutRect = document
